@@ -1,7 +1,7 @@
 function Playlists(){
     return (
         <div>
-            
+            Bom dia
         </div>
     )
 }
