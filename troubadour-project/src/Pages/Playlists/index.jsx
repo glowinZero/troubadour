@@ -1,7 +1,9 @@
+import Login from "../Login"
+
 function Playlists(){
     return (
         <div>
-            Bom dia
+            <Login></Login>
         </div>
     )
 }
