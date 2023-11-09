@@ -36,7 +36,7 @@ function Playlists(){
     }
 
     //Search Artists function (connecting to API here)
-    const searchArtists = async (e) => {
+    const searchArtist = async (e) => {
         e.preventDefault()
         try {
             const response = await axios.get("https://api.spotify.com/v1/search", {
@@ -45,13 +45,14 @@ function Playlists(){
                 },
                 params: {
                     q: searchKey,
-                    type: "artist"
+                    type: "playlist"
                 }
             });
 
             
             const data = response.data;
             console.log(data)
+            
     
         } catch (error) {
             console.error("Error during artist search:", error);
@@ -64,12 +65,14 @@ function Playlists(){
         {!token ?
         <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&response_type=${response_type}`}>Login to Spotify</a>
         : <button onClick={logout}>Logout</button>}
-
         {token ?
-        <form onSubmit={searchArtists}>
+        <div>
+        <form onSubmit={searchArtist}>
             <input type="text" onChange={e => setSearchKey(e.target.value)} />
             <button type="submit">Search</button>
         </form>
+        {data.map}
+        </div>
         : <h2>Please Login</h2>}
     </div>)
 }
