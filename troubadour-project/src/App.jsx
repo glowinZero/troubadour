@@ -7,7 +7,7 @@ import Playlists from './Pages/Playlists'
 function App() {
 
   return (
-    <div>
+    <div id="app">
       <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
