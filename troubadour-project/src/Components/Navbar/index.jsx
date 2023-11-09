@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import '../../App.css'
 import axios from "axios"
