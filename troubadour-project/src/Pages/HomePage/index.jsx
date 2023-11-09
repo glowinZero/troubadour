@@ -6,7 +6,7 @@ function HomePage(){
         navigate("/playlists") 
     } 
     return (
-        <div>
+        <div id="home-page">
             <h1>Troubadour</h1>
             <p>How are you feeling today?</p>
             <select name="How are you feeling today?">
