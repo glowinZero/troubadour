@@ -24,6 +24,11 @@
       "username": "bruno",
       "password": "qwerty",
       "id": 9
+    },
+    {
+      "username": "jakobtest",
+      "password": "qwertz1234",
+      "id": 10
     }
   ]
 }
