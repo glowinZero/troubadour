@@ -1,37 +1,34 @@
 {
   "users": [
     {
-      "name": "Bruno",
-      "email": "bruno.carneiro@outlook.pt",
+      "id": 1,
       "username": "glowinZero",
-      "password": "qwerty1234",
-      "id": 1
+      "password": "qwerty1234"
     },
     {
-      "name": "Jakob",
-      "email": "???",
+      "username": "henrique",
+      "password": "qwerty1234",
+      "id": 2
+    },
+    {
       "username": "jakob",
       "password": "qwerty4321",
-      "id": 2
-    }
-  ],
-  "Playlists": [
+      "id": 3
+    },
     {
-      "id": 1,
-      "mood": "happy",
-      "genre": "pop",
-      "songs": [
-        {
-          "artist": "Colplay",
-          "song": "Magic",
-          "audio": "../../troubadour/troubadour-project/public/Playlists/Pop/Coldplay-Magic.mp3"
-        },
-        {
-          "artist": "Colplay",
-          "song": "Magic",
-          "audio": "../../troubadour/troubadour-project/public/Playlists/Pop/Coldplay-Magic.mp3"
-        }
-      ]
+      "username": "ana",
+      "password": "ewqrt",
+      "id": 7
+    },
+    {
+      "username": "bruno",
+      "password": "qwerty",
+      "id": 9
+    },
+    {
+      "username": "jakobtest",
+      "password": "qwertz1234",
+      "id": 10
     }
   ]
 }
