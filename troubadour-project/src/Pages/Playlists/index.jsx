@@ -1,6 +1,7 @@
 import Login from "../Login"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import SpotifyPlayer from "react-spotify-web-playback"
 
 
 function Playlists(){
@@ -10,6 +11,9 @@ function Playlists(){
     const redirect_URI = "http://localhost:5173/playlists"
     const AUTH_END = "https://accounts.spotify.com/authorize"
     const response_type = "token"
+    const [playlists, setPlaylists] = useState([])
+    const [playlistLink, setPlaylistLink] = useState()
+    const scope = "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-modify-playback-state%20user-read-playback-state"
 
 
     const [token, setToken] = useState("")
@@ -25,6 +29,9 @@ function Playlists(){
 
             window.location.hash = ""
             window.localStorage.setItem("token", token)
+
+            console.log(token)
+            console.log(hash)
         }
         setToken(token)
     }, [])
@@ -51,6 +58,8 @@ function Playlists(){
 
             
             const data = response.data;
+            setPlaylists(data)
+            setPlaylistLink (playlists.playlists.items[0].external_urls.spotify)
             console.log(data)
             
     
@@ -62,16 +71,30 @@ function Playlists(){
     //If we dont have a token, user is prompted to login to spotify, so we can get it. If we are already logged in, the user can log out. 
     return (<div>
         <h1>Your Playlists</h1>
+{/*         {playlists.playlists.items[0].external_urls.spotify} */}
         {!token ?
-        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&response_type=${response_type}`}>Login to Spotify</a>
+        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}>Login to Spotify</a>
         : <button onClick={logout}>Logout</button>}
         {token ?
         <div>
         <form onSubmit={searchArtist}>
             <input type="text" onChange={e => setSearchKey(e.target.value)} />
             <button type="submit">Search</button>
+            {playlists.playlists !== undefined?
+            <div>
+                {console.log(playlistLink)}
+                <p>{playlistLink}</p>
+                <SpotifyPlayer
+                token={token}
+                uris={'spotify:track:6Ry7UnfEQh1gtRYbgnJpx9?si=9d7bf6158fb24f42'}
+                />
+
+            </div>
+            : <div>
+                {console.log('caught undefined')}
+                </div>}
+            
         </form>
-        {data.map}
         </div>
         : <h2>Please Login</h2>}
     </div>)
