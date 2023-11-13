@@ -66,7 +66,6 @@ function Playlists(){
 
     //Search Artists function (connecting to API here)
     const searchArtist = async (test) => {
-        console.log(searchKey)
         try {
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 headers: {
