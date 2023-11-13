@@ -2,10 +2,21 @@ import Login from "../Login"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import SpotifyPlayer from "react-spotify-web-playback"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 function Playlists(){
+    const navigate = useNavigate();
+    const {userId} = useParams();
+    console.log("userId:", userId)
+    const {mood} = useParams();
     useEffect(() => {
+        if(userId !== ":userId") {localStorage.setItem("userId", userId)}
+        if(mood !== ":mood") {localStorage.setItem("mood", mood)}
+        const newUser = localStorage.getItem("userId");
+        const newMood = localStorage.getItem("mood")
+        console.log("newUser:", newUser, "newModd", mood);
+        if(userId === ":userId" || mood === ":mood"){navigate(`/playlists/${newUser}/${newMood}`)}
         const script = document.createElement('script');
         script.src = 'https://open.spotify.com/embed/iframe-api/v1';
         script.async = true;
@@ -66,7 +77,6 @@ function Playlists(){
                     type: "playlist"
                 }
             });
-
             
             const data = response.data;
             setPlaylists(data)
