@@ -16,8 +16,8 @@ function Mood () {
 
     return(
         <div id="mood-page">
-            <p>How are you feeling today?</p>
-            <select name="How are you feeling today?" defaultValue={0} onChange={moodChoice}>
+            <p id="feeling-state">How are you feeling today?</p>
+            <select id="feeling-dropdown" name="How are you feeling today?" defaultValue={0} onChange={moodChoice}>
                 <option value={"neutral"}>Neutral</option>
                 <option value={"happy"}>Happy</option>
                 <option value={"sad"}>Sad</option>

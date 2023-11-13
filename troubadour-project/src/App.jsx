@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/mood/:userId" element={<Mood/>}/>
-        <Route path="/playlists/:userId/:mood" element={<Playlists/>}/> {/* add the mood by title not by id*/}
+        <Route path="/playlists/:userId/:mood" element={<Playlists/>}/>
         <Route path="/edit/:userId" element={<EditUser/>}/>
       </Routes>
     </div>

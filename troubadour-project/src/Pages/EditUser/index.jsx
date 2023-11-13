@@ -36,14 +36,16 @@ function EditUser (){
     
     return(
         <div id="edit-user">
-            <form onSubmit={e=>{handleUpdate(e)}}>
-                <label>Name: <input type="text" placeholder={loggedUser.name} value={name} onChange={e=>{setName(e.target.value)}}/></label>
-                <label>Email: <input type="email" placeholder={loggedUser.email} value={email} onChange={e=>{setEmail(e.target.value)}}/></label>
-                <label>Username: <input type="text" placeholder={loggedUser.username} value={username} onChange={e=>{setUsername(e.target.value)}}/></label>
-                <label>Password: <input type="password" placeholder="********" value={password} onChange={e=>{setPassword(e.target.value)}}/></label>
-                <label><button type="submit">Save changes</button></label>
+            <form id="form-edit-user"onSubmit={e=>{handleUpdate(e)}}>
+                <label>Name <input id="name" type="text" placeholder={loggedUser.name} value={name} onChange={e=>{setName(e.target.value)}}/></label>
+                <label>Email <input type="email" placeholder={loggedUser.email} value={email} onChange={e=>{setEmail(e.target.value)}}/></label>
+                <label>Username <input type="text" placeholder={loggedUser.username} value={username} onChange={e=>{setUsername(e.target.value)}}/></label>
+                <label>Password <input type="password" placeholder="********" value={password} onChange={e=>{setPassword(e.target.value)}}/></label>
+                <div id="buttons-edit-user">
+                    <label><button type="submit">Save changes</button></label>
+                    <label><button type="submit" onClick={deleteUser}>Delete user</button></label>
+                </div>
             </form>
-            <label><button type="submit" onClick={deleteUser}>Delete account</button></label>
         </div>
     )
 }

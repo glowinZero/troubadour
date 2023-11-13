@@ -5,9 +5,16 @@
   text-align: center;
 }
 
+body{
+  width: 100vh;
+  height: 100vh;
+}
+
 #app{
   width: 100vh;
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 #navbar{
@@ -96,7 +103,47 @@
 
 
 #mood-page{
+  width: 100vw;
+  height: 100vh;
   background-color: brown;
+  position: absolute;
+  z-index: -2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+select {
+  appearance: none;
+  width: 10%;
+  height: 5%;
+  font-size: 1.15rem;
+  text-indent: 2%;
+  background-color: #fff;
+  border: 1px solid #caced1;
+  border-radius: 0.25rem;
+  color: #000;
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+#mood-page button{
+  font-size: 15px;
+}
+
+#feeling-state{
+  color: white;
+  margin-top: 10vh;
+}
+
+#feeling-dropdown{
+  gap: 30px;
+}
+
+#feeling-dropdown option{
+  appearance: none;
 }
 
 #edit-user{
@@ -105,6 +152,46 @@
   align-items: center;
   width: 100vw;
   height: 100%;
+  background-color: brown;
+  color: white;
+}
+
+#form-edit-user{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  margin-top: 10vh;
+}
+
+#form-edit-user label{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+#form-edit-user input{
+  margin-top: 1%;
+  margin-bottom: 3%;
+  width: 100%;
+  border-radius: 8px;
+  text-indent: 2%;
+  height: 25px;
+  border-style: none;
+}
+
+
+#buttons-edit-user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 5%;
+  width: 100%;
+  font-size: 15px;
 }
 
 #menu{
