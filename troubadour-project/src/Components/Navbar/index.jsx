@@ -19,10 +19,15 @@ function Navbar () {
     const navigate = useNavigate();
     
     useEffect(() => {
-        axios.get(`${userApi}/users`).then((response)=>{
-            setUsers(response.data) 
-        }).catch(error=>{console.log(error)})
-
+        if (!users.length) {
+            axios.get(`${userApi}/users`)
+                .then((response) => {
+                    setUsers(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
         const storedUsername = localStorage.getItem("username");
 
         if (!loggedin && storedUsername !== null) {
