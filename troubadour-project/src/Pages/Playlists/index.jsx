@@ -2,6 +2,7 @@ import Login from "../Login"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import SpotifyPlayer from "react-spotify-web-playback"
+import { useParams } from "react-router-dom"
 
 
 function Playlists(){
@@ -17,9 +18,11 @@ function Playlists(){
       }, []);
 
     //Variables
+    const {userId} = useParams()
+    const {mood} = useParams()
     const client_id = "57045c8caab548509de4307fd8995ec4"
     const client_secret = "f8275ac2c7944282a8c10a3b9a2b3ae8"
-    const redirect_URI = "http://localhost:5173/playlists/:userId/:mood"
+    const redirect_URI = "http://localhost:5173/playlists/"
     const AUTH_END = "https://accounts.spotify.com/authorize"
     const response_type = "token"
     const [playlists, setPlaylists] = useState([])
@@ -40,6 +43,8 @@ function Playlists(){
 
             window.location.hash = ""
             window.localStorage.setItem("token", token)
+            window.localStorage.setItem("userId", userId)
+            window.localStorage.setItem("mood", mood)
 
             console.log(token)
             console.log(hash)
@@ -83,9 +88,8 @@ function Playlists(){
     //If we dont have a token, user is prompted to login to spotify, so we can get it. If we are already logged in, the user can log out. 
     return (<div>
         <h1>Your Playlists</h1>
-{/*         {playlists.playlists.items[0].external_urls.spotify} */}
         {!token ?
-        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}>Login to Spotify</a>
+        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`} target="_blank">Login to Spotify</a>
         : <button onClick={logout}>Logout</button>}
         {token?
         <div>

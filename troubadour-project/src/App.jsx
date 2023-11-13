@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage'
 import Playlists from './Pages/Playlists'
 import Mood from './Pages/Mood'
 import EditUser from './Pages/EditUser'
+import PlaylistsNavigation from './Pages/PlaylistsNavigation'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/mood/:userId" element={<Mood/>}/>
         <Route path="/playlists/:userId/:mood" element={<Playlists/>}/> {/* add the mood by title not by id*/}
         <Route path="/edit/:userId" element={<EditUser/>}/>
+        <Route path="/playlists/" element={<PlaylistsNavigation/>}></Route>
       </Routes>
     </div>
   )
