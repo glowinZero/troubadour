@@ -93,7 +93,6 @@ function Playlists(){
     //If we dont have a token, user is prompted to login to spotify, so we can get it. If we are already logged in, the user can log out. 
     return (<div>
         <h1>Your Playlists</h1>
-{/*         {playlists.playlists.items[0].external_urls.spotify} */}
         {!token ?
         <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}>Login to Spotify</a>
         : <button onClick={logout}>Logout</button>}
