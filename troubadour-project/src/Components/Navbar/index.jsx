@@ -27,25 +27,43 @@ function Navbar () {
 
         if (!loggedin && storedUsername !== null) {
             setUsername(storedUsername);
-            setLoggedin(true);
-          }
+            const userFound = users.some(user => user.username === storedUsername);
+            setLoggedin(userFound);
+        }
+        
         if (!loggedin) {
             updateUsernameFromStorage();
-        }
-        }, [loggedin, username, id]);
-
-        const updateUsernameFromStorage = () => {
-            const storedUsername = window.localStorage.getItem("username");
-            if (storedUsername && !username) {
-              setUsername(storedUsername);
+            if (window.location.pathname === "/" && performance.navigation.type !== 1) {
+                navigate("/");
             }
-          };
+        }
+    }, [loggedin, navigate, users]);
+
+    const updateUsernameFromStorage = () => {
+        const storedUsername = window.localStorage.getItem("username");
+        if (storedUsername && !username) {
+            setUsername(storedUsername);
+        }
+    };
     
     const handleSubmit = (e, close) =>{
+        e.preventDefault()
+        if (!inputUsername && !password) {
+            if (loggedin) {
+                setLoggedin(false, () => {
+                    setUsername("");
+                    setPassword("");
+                    setId(null);
+                    navigate("/");
+                    window.location.reload();
+                    localStorage.removeItem("username");
+                    close();
+                  });
+              } 
+          }
         localStorage.setItem("username", inputUsername);
-        e.preventDefault();
-        if (!inputUsername || !password){ alert("Username and password are required.")}
-        else{
+
+        
         const requestBody = {inputUsername, password};
         formType === "signup" ? axios.post(`${userApi}/users`, requestBody).then(()=>{
             setLoggedin(true)
@@ -64,7 +82,6 @@ function Navbar () {
                 setPassword("")
                 alert("User or password is incorrect or missing");
             }}).catch(error=>{console.log(error)})
-        }
     }
 
     const toggleForm = () =>{
@@ -72,14 +89,14 @@ function Navbar () {
     }
 
 
-    const logOut = ()=>{
-        setLoggedin(false)
-        setUsername("")
-        setPassword("")
-        navigate("/")
-        window.location.reload();
+    const logOut = () => {
+        setLoggedin(false);
+        setUsername("");
+        setPassword("");
+        setId(null);
         localStorage.removeItem("username");
-    }
+        navigate("/");
+    };
 
     const openPopup = () => {
         setPopupOpen(true);
@@ -92,6 +109,7 @@ function Navbar () {
     const editUser = () =>{
         console.log("Navigating to edit page with id:", id);
         navigate(`/edit/${id}`)
+        setPopupOpen(false);
         closePopup();
     }
 
@@ -119,7 +137,8 @@ function Navbar () {
                     </div>) : (
                         <div id="form">
                             <button onClick={() => close()}>x</button>
-                            <p>{!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}</p>
+                            <p>{!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}</p>´
+                            <p>Hi {username} !</p>
                             <button type="button" onClick={()=>{logOut()}}>Logout</button>
                             <button type="button" onClick={()=>{editUser()}}>Edit account</button>
                         </div>

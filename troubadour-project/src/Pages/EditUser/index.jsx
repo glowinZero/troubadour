@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
 const userApi = "http://localhost:5178"
-import '../../App.css'
 
 function EditUser (){
     const user = useParams();
@@ -18,15 +17,14 @@ function EditUser (){
             setloggedUser(response.data)
             console.log(loggedUser)
         }).catch(error=>{console.log(error)})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleUpdate = ()=>{
         const updateInfo = {
-            name: name === "" ? loggedUser.name : name,
-            email: email === "" ? loggedUser.email : email,
-            username: username === "" ? loggedUser.username : username,
-            password: password === "" ? loggedUser.password : password,
+            name: !name ? loggedUser.name : name,
+            email: !email ? loggedUser.email : email,
+            username: !username ? loggedUser.username : username,
+            password: !password ? loggedUser.password : password,
         };
         axios.put(`${userApi}/users/${user.userId}`, updateInfo)
     }

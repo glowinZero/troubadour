@@ -92,7 +92,7 @@ function Playlists(){
         <form onSubmit={searchArtist}>
             <input type="text" onChange={e => setSearchKey(e.target.value)} />
             <button type="submit">Search</button>
-            {playlists.playlists !== undefined?
+            {playlists.playlists ?
             <div>
                 <p>{playlistLink}</p>
                 <div id="embed-iframe">
