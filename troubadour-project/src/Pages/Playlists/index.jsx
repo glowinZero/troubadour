@@ -38,6 +38,9 @@ function Playlists(){
         setToken(token)
         setSearchKey(newMood)
         {searchArtist(newMood)}
+        {savePlaylist(newMood)}
+
+        
 
         return () => {
           document.body.removeChild(script);
@@ -55,6 +58,8 @@ function Playlists(){
     const [playlists, setPlaylists] = useState([])
     const [playlistLink, setPlaylistLink] = useState("")
     const scope = "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state"
+    const JSONLink = "http://localhost:5178/playlists"
+
 
     //Get the access token from URL
 
@@ -64,15 +69,26 @@ function Playlists(){
         window.localStorage.removeItem("token")
     }
 
+    const savePlaylist = (savedMood) =>{
+        console.log("saveplaylist")
+        const requestBody = {
+            url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+            modd: savedMood,
+            userId: userId
+        }
+        axios.post(JSONLink, requestBody)
+    }
+
     //Search Artists function (connecting to API here)
-    const searchArtist = async (test) => {
+    const searchArtist = async (searchMood) => {
         try {
+            console.log("test", searchMood, playlistLink)
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 params: {
-                    q: test,
+                    q: searchMood,
                     type: "playlist"
                 }
             });
