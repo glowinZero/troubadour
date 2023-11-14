@@ -108,7 +108,7 @@ function Navbar () {
             {loggedin && <div id="menu">
                 <Link id="link-menu" to="/playlists/:userId/:mood"> Playlists</Link>
             </div>}
-            <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Login</p> : <p>{username}</p>}</button>}
+            <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
             modal
             nested
             open={popupOpen}
@@ -121,8 +121,8 @@ function Navbar () {
                         <h4>{formType === "login" ? "Login" : "Signup"}</h4>
                         <label><input type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
                         <label><input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
-                        <button type="submit">{formType === "login" ? "Login" : "Signup"}</button>
-                        <button id="home-signup" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account! Login" : "Don't have an account! Signup"}</button>
+                        <button id="home-signup" type="submit">{formType === "login" ? "Login" : "Signup"}</button>
+                        <button id="home-toggle" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account! Login" : "Don't have an account! Signup"}</button>
                     </div>) : (
                         <div id="form">
                             <button onClick={() => close()}>x</button>

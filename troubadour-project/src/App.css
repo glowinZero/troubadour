@@ -11,11 +11,60 @@ body{
 }
 
 #app{
-  width: 100vh;
+  position: relative;
   height: 100vh;
-  margin: 0;
-  padding: 0;
+  background-color: rgb(24, 24, 24);
+  overflow: hidden;
+  width: 100vw;
 }
+
+.blob-animation{
+  position: relative;
+  height: 100vh;
+  width: 80vw;
+  rotate: rotate(90deg);
+}
+
+.blob-svg {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; 
+  rotate: rotate(90deg);
+}
+
+.stop1 {
+  stop-color: rgb(245, 36, 36);
+  transition: stop-color 2s ease-in-out;
+}
+
+.stop2 {
+  stop-color: rgb(0, 235, 27);
+  transition: stop-color 2s ease-in-out;
+}
+
+
+
+.overlay-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; 
+  color: black; 
+}
+
+#background{
+  z-index: -2;
+}
+
 
 #navbar{
   width: 100vw;
@@ -44,16 +93,70 @@ body{
 }
 
 #buttons-enter{
-  margin-right: 20px;
+  margin-right: 2;
 }
 
 #home-signup{
-  margin-right: 20px;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  width: 100%;
+  margin-bottom: -20px;
 }
 
-#popup-login{
-  margin-right: 30px;
+#home-signup::after,
+#home-signup::before {
+  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 5px auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
 }
+
+#home-signup:hover::after,
+#home-signup:hover::before {
+  backface-visibility: hidden;
+  border-color: #222222;
+  transition: width 350ms ease-in-out;
+  width: 30%;
+}
+
+#home-toggle{
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  width: 100%;
+}
+
+#home-toggle::after,
+#home-toggle::before {
+  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 5px auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+#home-toggle:hover::after,
+#home-toggle:hover::before {
+  backface-visibility: hidden;
+  border-color: #222222;
+  transition: width 350ms ease-in-out;
+  width: 100%;
+}
+
 
 #form{
   display: flex;
@@ -62,14 +165,54 @@ body{
   position: center center;
   background-color: white;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   padding: 20px;
   margin-right: 20px;
+  border-radius: 20px;
+}
+
+#form h4{
+  margin-bottom: 10px;
 }
 
 #popup{
-  margin-right: 30px;
+  all: unset;
+  margin-right: 20px;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  width: 7%;
 }
+
+#popup:after,
+#popup:before {
+  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: -10px auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+#popup:hover:after,
+#popup:hover:before {
+  backface-visibility: hidden;
+  border-color: #fff;
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+
+#popup:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
 
 .overlay {
   position: fixed;
@@ -87,8 +230,6 @@ body{
 #home-page{
   width: 100%;
   height: 100%;
-  background-image: url("../../../public/Background/blobanimation (1).svg");
-  background-color: rgb(22, 22, 22);
   background-size: 60%;
   background-repeat: no-repeat;
   background-position:center;
@@ -97,10 +238,15 @@ body{
   color: white;
 }
 
-#home-page h1{
-  margin-top: 40vh;
+#background{
+  z-index: -4;
 }
 
+#home-page h1{
+  margin-top: 40vh;
+  height: 100%;
+  width: 100%;
+}
 
 #mood-page{
   width: 100vw;
