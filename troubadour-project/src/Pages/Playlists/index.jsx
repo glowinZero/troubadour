@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import SpotifyPlayer from "react-spotify-web-playback"
 import { useNavigate, useParams } from "react-router-dom"
+import History from'../../Components/History'
 
 
 function Playlists(){
@@ -57,7 +58,7 @@ function Playlists(){
                     if (playlistLink){
                         const requestBody = {
                             url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
-                            modd: searchMood,
+                            mood: searchMood,
                             userId: userId
                         }
                         axios.post(JSONLink, requestBody)

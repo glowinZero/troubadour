@@ -18,9 +18,21 @@
   "playlists": [
     {
       "url": "https://niceplaylist.com",
-      "modd": "happy",
+      "mood": "happy",
       "userId": "1",
       "id": 1
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/37i9dQZF1DX9u7XXOp0l5L",
+      "mood": "happy",
+      "userId": "1",
+      "id": 2
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/37i9dQZF1DX9u7XXOp0l5L",
+      "mood": "happy",
+      "userId": "1",
+      "id": 3
     }
   ]
 }
