@@ -1,23 +1,37 @@
-import { useEffect, useState } from "react"
-import Playlists from "../../Pages/Playlists"
+import { useState } from 'react';
+import Collapsible from 'react-collapsible';
+import Share from '../SocialShare';
 
-function PlaylistHistory(){
-    const [playlists, setPlaylists] = useState();
-    useEffect(() => {
-      setPlaylists(Playlists);
-    }, [])
-    
-    return(
-        <div>
-            <h1>Playlists:</h1>
-            {playlists.map((playlist) => (
-                <div key={playlist.id}> 
-                    <p>{playlist.mood}</p>
-                    <p>{playlist.source}</p>
-                </div>
-            ))}
-        </div>
-    )
+function PlaylistHistory() {
+  // eslint-disable-next-line no-unused-vars
+  const [playlists, setPlaylists] = useState([
+    {
+      url: "https://niceplaylist.com",
+      mood: "happy",
+      userId: "1",
+      id: 1
+    },
+    {
+      url: "https://sadplaylist.com",
+      mood: "sad",
+      userId: "1",
+      id: 2
+    }
+  ]);
+
+  return (
+    <div id="list-playlists">
+      {playlists.map((playlist) => (
+        <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood}>
+          <p>
+            This is the content for the playlist with URL: {playlist.url}
+          </p>
+          <button>Delete</button>
+          <Share/>
+        </Collapsible>
+      ))}
+    </div>
+  );
 }
 
-export default PlaylistHistory
+export default PlaylistHistory;

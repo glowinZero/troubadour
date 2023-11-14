@@ -203,3 +203,17 @@ select {
   color: white;
   text-decoration: none;
 }
+
+#list-playlists{
+  margin-top: 40vh;
+  cursor: pointer;
+}
+
+#social-share{
+  cursor: pointer;
+}
+
+#accordeon{
+  background-color: grey;
+  color: white;
+}
