@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Collapsible from 'react-collapsible';
+import Share from '../SocialShare';
 
 function PlaylistHistory() {
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,8 @@ function PlaylistHistory() {
           <p>
             This is the content for the playlist with URL: {playlist.url}
           </p>
+          <button>Delete</button>
+          <Share/>
         </Collapsible>
       ))}
     </div>
