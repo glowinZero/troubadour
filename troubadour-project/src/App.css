@@ -208,3 +208,13 @@ select {
   margin-top: 40vh;
   cursor: pointer;
 }
+
+#social-share{
+  margin-top: 40vh;
+  cursor: pointer;
+}
+
+#accordeon{
+  background-color: grey;
+  color: white;
+}

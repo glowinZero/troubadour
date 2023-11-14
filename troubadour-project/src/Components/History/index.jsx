@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Collapsible from 'react-collapsible';
 
 function PlaylistHistory() {
+  // eslint-disable-next-line no-unused-vars
   const [playlists, setPlaylists] = useState([
     {
       url: "https://niceplaylist.com",
@@ -20,7 +21,7 @@ function PlaylistHistory() {
   return (
     <div id="list-playlists">
       {playlists.map((playlist) => (
-        <Collapsible key={playlist.id} trigger={playlist.mood}>
+        <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood}>
           <p>
             This is the content for the playlist with URL: {playlist.url}
           </p>
