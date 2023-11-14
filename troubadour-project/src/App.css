@@ -1,4 +1,5 @@
 #root {
+  font-family:monospace;
   width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -6,11 +7,13 @@
 }
 
 body{
+  font-family:monospace;
   width: 100vh;
   height: 100vh;
 }
 
 #app{
+  font-family:monospace;
   position: relative;
   height: 100vh;
   background-color: rgb(24, 24, 24);
@@ -48,6 +51,7 @@ body{
 
 
 .overlay-content {
+  font-family:monospace;
   position: fixed;
   top: 0;
   left: 0;
@@ -67,6 +71,7 @@ body{
 
 
 #navbar{
+  font-family:monospace;
   width: 100vw;
   color: white;
   height: 10vh;
@@ -75,16 +80,18 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  z-index: 8;
 }
 
 #logo-bar{
+  font-family:monospace;
   width: 4vw;
   padding-top: 10px;
   padding-left: 20px;
 }
 
 #signup{
+  font-family:monospace;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -93,68 +100,42 @@ body{
 }
 
 #buttons-enter{
+  font-family:monospace;
   margin-right: 2;
 }
 
 #home-signup{
+  font-family:monospace;
   cursor: pointer;
   appearance: none;
   border: none;
   font-size: 15px;
   padding: 0;
   width: 100%;
-  margin-bottom: -20px;
-}
-
-#home-signup::after,
-#home-signup::before {
-  backface-visibility: hidden;
-  border: 1px solid rgba(255, 255, 255, 0);
-  bottom: 0px;
-  content: " ";
-  display: block;
-  margin: 5px auto;
-  position: relative;
-  transition: all 280ms ease-in-out;
-  width: 0;
-}
-
-#home-signup:hover::after,
-#home-signup:hover::before {
-  backface-visibility: hidden;
-  border-color: #222222;
-  transition: width 350ms ease-in-out;
-  width: 30%;
+  margin-bottom: -10px;
+  height: 30px;
+  background-color: black;
+  color: white;
 }
 
 #home-toggle{
+  font-family:monospace;
+  font-weight: bold;
   cursor: pointer;
   appearance: none;
   border: none;
-  font-size: 15px;
+  font-size: 10px;
   padding: 0;
   width: 100%;
+  height: 25px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
 }
 
-#home-toggle::after,
-#home-toggle::before {
-  backface-visibility: hidden;
-  border: 1px solid rgba(255, 255, 255, 0);
-  bottom: 0px;
-  content: " ";
-  display: block;
-  margin: 5px auto;
-  position: relative;
-  transition: all 280ms ease-in-out;
-  width: 0;
-}
-
-#home-toggle:hover::after,
-#home-toggle:hover::before {
-  backface-visibility: hidden;
-  border-color: #222222;
-  transition: width 350ms ease-in-out;
-  width: 100%;
+#close-popup{
+  all: unset;
+  cursor: pointer;
 }
 
 
@@ -169,13 +150,40 @@ body{
   padding: 20px;
   margin-right: 20px;
   border-radius: 20px;
+  font-family:monospace;
 }
 
 #form h4{
-  margin-bottom: 10px;
+  font-family:monospace;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
+#username{
+  font-family:monospace;
+  border-radius: 5px;
+  border-style: none;
+  border: 1px solid black;
+  text-indent: 4%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: 20px;
+}
+
+#password{
+  font-family:monospace;
+  border-radius: 5px;
+  border-style: none;
+  border: 1px solid black;
+  text-indent: 4%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: 20px;
+}
+
+
 #popup{
+  font-family:monospace;
   all: unset;
   margin-right: 20px;
   cursor: pointer;
@@ -197,6 +205,7 @@ body{
   position: relative;
   transition: all 280ms ease-in-out;
   width: 0;
+  font-family:monospace;
 }
 
 #popup:hover:after,
@@ -205,12 +214,14 @@ body{
   border-color: #fff;
   transition: width 350ms ease-in-out;
   width: 70%;
+  font-family:monospace;
 }
 
 #popup:hover:before {
   bottom: auto;
   top: 0;
   width: 70%;
+  font-family:monospace;
 }
 
 
@@ -225,6 +236,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family:monospace;
 }
 
 #home-page{
@@ -236,6 +248,7 @@ body{
   position: absolute;
   z-index: -1;
   color: white;
+  font-family:monospace;
 }
 
 #background{
@@ -243,17 +256,18 @@ body{
 }
 
 #home-page h1{
+  font-family:monospace;
   margin-top: 40vh;
   height: 100%;
   width: 100%;
 }
 
 #mood-page{
+  font-family:monospace;
   width: 100vw;
   height: 100vh;
-  background-color: brown;
   position: absolute;
-  z-index: -2;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -262,6 +276,7 @@ body{
 }
 
 select {
+  font-family:monospace;
   appearance: none;
   width: 10%;
   height: 5%;
@@ -276,33 +291,40 @@ select {
 }
 
 #mood-page button{
+  font-family:monospace;
   font-size: 15px;
 }
 
 #feeling-state{
+  font-family:monospace;
   color: white;
   margin-top: 10vh;
 }
 
 #feeling-dropdown{
+  font-family:monospace;
   gap: 30px;
 }
 
 #feeling-dropdown option{
+  font-family:monospace;
   appearance: none;
 }
 
 #edit-user{
+  font-family:monospace;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
   width: 100vw;
-  height: 100%;
-  background-color: brown;
+  height: 100vh;
   color: white;
+  z-index: 5;
 }
 
 #form-edit-user{
+  font-family:monospace;
   display: flex;
   justify-content:center;
   align-items: center;
@@ -312,6 +334,7 @@ select {
 }
 
 #form-edit-user label{
+  font-family:monospace;
   display: flex;
   justify-content:center;
   align-items: center;
@@ -320,6 +343,7 @@ select {
 }
 
 #form-edit-user input{
+  font-family:monospace;
   margin-top: 1%;
   margin-bottom: 3%;
   width: 100%;
@@ -331,6 +355,7 @@ select {
 
 
 #buttons-edit-user{
+  font-family:monospace;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -341,25 +366,84 @@ select {
 }
 
 #menu{
+  font-family:monospace;
   color: white;
   text-decoration: none;
 }
 
 #link-menu{
+  font-family:monospace;
   color: white;
   text-decoration: none;
 }
 
 #list-playlists{
+  font-family:monospace;
   margin-top: 40vh;
   cursor: pointer;
 }
 
 #social-share{
+  font-family:monospace;
   cursor: pointer;
 }
 
 #accordeon{
+  font-family:monospace;
   background-color: grey;
   color: white;
+}
+
+#playlist-page{
+  font-family:monospace;
+  z-index: 5;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+}
+
+#mood-button{
+  font-family:monospace;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  width: 10.1%;
+  height: 30px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+#save-user{
+  font-family:monospace;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  width: 90%;
+  height: 30px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+#delete-user{
+  font-family:monospace;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  width: 90%;
+  height: 30px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
 }
