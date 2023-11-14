@@ -1,10 +1,12 @@
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate, Link, useLocation } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import '../../App.css'
 import axios from "axios"
 import { useEffect, useState } from "react"
 import logo from "../../../public/noun-banjo-5393194 (1).png"
 const userApi = "http://localhost:5178"
+
+
 function Navbar () {
     const [users, setUsers] = useState([]);
     const [id, setId] = useState();
@@ -15,6 +17,8 @@ function Navbar () {
     const [loggedin, setLoggedin] = useState(false)
     const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
     useEffect(() => {
         if (!users.length) {
             axios.get(`${userApi}/users`)
@@ -26,6 +30,7 @@ function Navbar () {
                 });
         }
         const storedUsername = localStorage.getItem("username");
+        
         if (!loggedin && storedUsername !== null) {
             setUsername(storedUsername);
             const userFound = users.some(user => user.username === storedUsername);
@@ -33,11 +38,12 @@ function Navbar () {
         }
         if (!loggedin) {
             updateUsernameFromStorage();
-            if (window.location.pathname === "/" && performance.navigation.type !== 1) {
+            if (location.pathname === "/" && performance.navigation.type !== 1) {
                 navigate("/");
             }
         }
-    }, [loggedin, navigate, users]);
+    }, [loggedin, location.pathname, navigate, users]);
+
     const updateUsernameFromStorage = () => {
         const storedUsername = window.localStorage.getItem("username");
         if (storedUsername && !username) {
@@ -84,11 +90,11 @@ function Navbar () {
     }
     const logOut = () => {
         setLoggedin(false);
-        setUsername("");
-        setPassword("");
         setId(null);
         localStorage.removeItem("username");
         navigate("/");
+        setInputUsername("");
+        setPassword("");
     };
     const openPopup = () => {
         setPopupOpen(true);
@@ -108,7 +114,7 @@ function Navbar () {
             {loggedin && <div id="menu">
                 <Link id="link-menu" to="/playlists/:userId/:mood"> Playlists</Link>
             </div>}
-            <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Login</p> : <p>{username}</p>}</button>}
+            <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
             modal
             nested
             open={popupOpen}
@@ -117,19 +123,19 @@ function Navbar () {
                 <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>
                 {!loggedin || !username === "" ?(
                     <div id="form">
-                        <button onClick={() => close()}>x</button>
-                        <h4>{formType === "login" ? "Login" : "Signup"}</h4>
-                        <label><input type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
-                        <label><input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
-                        <button type="submit">{formType === "login" ? "Login" : "Signup"}</button>
-                        <button id="home-signup" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account! Login" : "Don't have an account! Signup"}</button>
+                        <button id="close-popup" onClick={() => close()}>x</button>
+                        <h4>{formType === "login" ? "login" : "signup"}</h4>
+                        <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
+                        <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
+                        <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>
+                        <button id="home-toggle" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account!" : "Don't have an account!"}</button>
                     </div>) : (
                         <div id="form">
-                            <button onClick={() => close()}>x</button>
-                            <p>{!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}</p>´
+                            <button id="close-popup" onClick={() => close()}>x</button>
+                            {!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}
                             <p>Hi {username} !</p>
-                            <button type="button" onClick={()=>{logOut()}}>Logout</button>
-                            <button type="button" onClick={()=>{editUser()}}>Edit account</button>
+                            <button id="home-signup" type="button" onClick={()=>{logOut()}}>Logout</button>
+                            <button id="home-toggle" type="button" onClick={()=>{editUser()}}>Edit account</button>
                         </div>
                         )}
                 </form>

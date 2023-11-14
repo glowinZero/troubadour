@@ -16,5 +16,191 @@
     }
   ],
   "playlists": [
+    {
+      "url": "https://niceplaylist.com",
+      "modd": "happy",
+      "userId": "1",
+      "id": 1
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "neutral",
+      "userId": "1",
+      "id": 2
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "neutral",
+      "userId": "1",
+      "id": 3
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "undefined",
+      "userId": "1",
+      "id": 4
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "undefined",
+      "userId": "1",
+      "id": 5
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 6
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 7
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 8
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 9
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 10
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 11
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 12
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 13
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 14
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 15
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 16
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 17
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 18
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 19
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 20
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 21
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 22
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 23
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 24
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 25
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 26
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 27
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 28
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": "1",
+      "id": 29
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 30
+    },
+    {
+      "url": "https://open.spotify.com/embed/playlist/",
+      "modd": "happy",
+      "userId": ":userId",
+      "id": 31
+    }
   ]
 }

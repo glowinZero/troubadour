@@ -22,7 +22,7 @@ function Mood () {
                 <option value={"happy"}>Happy</option>
                 <option value={"sad"}>Sad</option>
             </select>
-            <button onClick={()=>handleSubmit()}>Submit</button>
+            <button id="mood-button" onClick={()=>handleSubmit()}>Submit</button>
         </div>
     )
 }
