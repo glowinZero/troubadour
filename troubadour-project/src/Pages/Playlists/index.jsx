@@ -45,9 +45,7 @@ function Playlists(){
         return () => {
           document.body.removeChild(script);
         };
-      }, []);
-
-      console.log(searchKey)
+      }, [token]);
 
     //Variables
     const client_id = "57045c8caab548509de4307fd8995ec4"
