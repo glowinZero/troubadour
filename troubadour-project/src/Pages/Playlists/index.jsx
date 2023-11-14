@@ -7,48 +7,6 @@ import { useNavigate, useParams } from "react-router-dom"
 
 function Playlists(){
     
-    const navigate = useNavigate();
-    const {userId} = useParams();
-    const {mood} = useParams();
-    const [token, setToken] = useState("")
-    const [searchKey, setSearchKey] = useState("")
-
-
-    useEffect(() => {
-        const hash = window.location.hash
-        let token = window.localStorage.getItem("token")
-
-
-        if(userId !== ":userId") {localStorage.setItem("userId", userId)}
-        if(mood !== ":mood") {localStorage.setItem("mood", mood)}
-        const newUser = localStorage.getItem("userId");
-        const newMood = localStorage.getItem("mood");
-        console.log(newMood) 
-        if(userId === ":userId" || mood === ":mood"){navigate(`/playlists/${newUser}/${newMood}`)}
-        const script = document.createElement('script');
-        script.src = 'https://open.spotify.com/embed/iframe-api/v1';
-        script.async = true;
-        document.body.appendChild(script);
-        if (!token && hash){
-            token = hash.substring(1).split("&").find(e=>e.startsWith("access_token")).split("=")[1]
-
-            window.location.hash = ""
-            window.localStorage.setItem("token", token)
-        }
-        setToken(token)
-        setSearchKey(newMood)
-        {searchArtist(newMood)}
-        {savePlaylist(newMood)}
-
-        
-
-        return () => {
-          document.body.removeChild(script);
-        };
-      }, []);
-
-      console.log(searchKey)
-
     //Variables
     const client_id = "57045c8caab548509de4307fd8995ec4"
     const client_secret = "f8275ac2c7944282a8c10a3b9a2b3ae8"
@@ -59,9 +17,11 @@ function Playlists(){
     const [playlistLink, setPlaylistLink] = useState("")
     const scope = "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state"
     const JSONLink = "http://localhost:5178/playlists"
-
-
-    //Get the access token from URL
+    const navigate = useNavigate();
+    const {userId} = useParams();
+    const {mood} = useParams();
+    const [token, setToken] = useState("")
+    const [searchKey, setSearchKey] = useState("")
 
     //Logout function
     const logout = () => {
@@ -69,20 +29,9 @@ function Playlists(){
         window.localStorage.removeItem("token")
     }
 
-    const savePlaylist = (savedMood) =>{
-        console.log("saveplaylist")
-        const requestBody = {
-            url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
-            modd: savedMood,
-            userId: userId
-        }
-        axios.post(JSONLink, requestBody)
-    }
-
     //Search Artists function (connecting to API here)
-    const searchArtist = async (searchMood) => {
+    const searchArtist = async (searchMood, JSONLink, userId) => {
         try {
-            console.log("test", searchMood, playlistLink)
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -103,6 +52,16 @@ function Playlists(){
                     // Extract the playlist ID
                     const playlistId = firstPlaylist.external_urls.spotify.split('/playlist/')[1];
                     setPlaylistLink(playlistId);
+                    console.log(playlistLink, "playlistlink in try");
+                    console.log("save playlist", searchMood, userId, JSONLink, playlistLink)
+                    if (playlistLink){
+                        const requestBody = {
+                            url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+                            modd: searchMood,
+                            userId: userId
+                        }
+                        axios.post(JSONLink, requestBody)
+                    }
                 }
             } else {
                 // Handle the case when no playlists are found
@@ -114,19 +73,63 @@ function Playlists(){
         }
     };
 
+    useEffect(() => {
+        const hash = window.location.hash
+        let token = window.localStorage.getItem("token")
+
+
+        if(userId !== ":userId") {localStorage.setItem("userId", userId)}
+        if(mood !== ":mood") {localStorage.setItem("mood", mood)}
+        const newUser = localStorage.getItem("userId");
+        const newMood = localStorage.getItem("mood");
+        if(userId === ":userId" || mood === ":mood"){navigate(`/playlists/${newUser}/${newMood}`)}
+        const script = document.createElement('script');
+        script.src = 'https://open.spotify.com/embed/iframe-api/v1';
+        script.async = true;
+        document.body.appendChild(script);
+        if (!token && hash){
+            token = hash.substring(1).split("&").find(e=>e.startsWith("access_token")).split("=")[1]
+
+            window.location.hash = ""
+            window.localStorage.setItem("token", token)
+        }
+        setToken(token)
+        setSearchKey(newMood)   
+        {newMood && JSONLink && userId?
+        searchArtist(newMood, JSONLink, userId, playlistLink )
+        :console.log("none")} 
+          
+        
+
+/*         const savePlaylist = (savedMood) =>{
+            console.log("saveplaylist")
+            const requestBody = {
+                url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+                modd: savedMood,
+                userId: userId
+            }
+            axios.post(JSONLink, requestBody)
+        } */
+
+        return () => {
+          document.body.removeChild(script);
+        };
+      }, [playlistLink,userId,JSONLink,playlistLink]);
+
+
     
     //If we dont have a token, user is prompted to login to spotify, so we can get it. If we are already logged in, the user can log out. 
     return (<div>
         <h1>Your Playlists</h1>
-        {console.log("working")}
         {!token ?
         <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}>Login to Spotify</a>
         : <button onClick={logout}>Logout</button>}
         {token?
         <div>
-            {console.log('token defined')}
+            {console.log('token defined:', token)}
             {playlists.playlists ?
             <div>
+                {console.log(playlistLink, "playlistlink form")}
                 <div id="embed-iframe">
                     <iframe
                     title="Spotify Playlist"
