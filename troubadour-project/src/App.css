@@ -400,10 +400,27 @@ select {
   text-decoration: none;
 }
 
-#list-playlists{
-  font-family:monospace;
+#history {
+  font-family:Monaco;
+  color: white;
   margin-top: 40vh;
   cursor: pointer;
+}
+
+#historylist{
+  font-family:Monaco;
+  color: white;
+  margin-top: 5vh;
+  max-height: 150px;
+  position: relative
+
+}
+
+#historylist p{
+  cursor: pointer;
+  transition: max-height 0.2s ease-out 0s;
+  position: relative
+
 }
 
 #social-share{
@@ -415,7 +432,16 @@ select {
   font-family:monospace;
   background-color: grey;
   color: white;
+  padding:0%;
+  position: relative
+
 }
+
+#accordeonContent{
+  padding:0%;
+}
+
+
 
 #playlist-page{
   font-family:monospace;

@@ -9,13 +9,21 @@ function PlaylistHistory() {
   // eslint-disable-next-line no-unused-vars
   const [playlists, setPlaylists] = useState([]);
   const {userId} = useParams()
-
   useEffect (()=>{
-    axios.get (JSONLink).then((response)=>{
-      setPlaylists(response.data)
-    })
+    axios.get (JSONLink)
+    .then((response)=>{
+      setPlaylists((prevPlaylists) => {
+        const filteredPlaylist = response.data.filter((playlist)=>
+          playlist.userId.includes(1)
+          );
+          return filteredPlaylist
+        });
+      })
     .catch(error=>{console.log(error)})
-  }, [])
+  }, [JSONLink, userId])
+
+  console.log(playlists)
+
 
   const deletePlaylist = (playlistId) => {
     axios
@@ -31,29 +39,31 @@ function PlaylistHistory() {
 
 //apply filter by user id to display specific user history.
   return (
-    <div id="list-playlists" key="playlistkey">
+    <div id="history" key="playlistkey">
+      <h1>Your saved playlists</h1>
+      <div id="historylist">
       {playlists.map((playlist) => (
-        <Collapsible style={{color: "white"}} id="accordeon" key={playlist.id} trigger={playlist.mood}>
-          <p style={{color: "white"}}>
-            This is the content for the playlist with URL: {playlist.url}
-            <div id="embed-iframe">
+        <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood}>
+          <p id="accordeonContent"style={{color: "white"}}>
+{/*             This is the content for the playlist with URL: {playlist.url}
+ */}             <div id="embed-iframe">
                     <iframe
                     title="Spotify Playlist"
-                    style={{ borderRadius: '12px', marginRight: '200px', marginTop: '20px' }}
+                    style={{ borderRadius: '12px', marginRight: '10px', marginTop: '0px', marginBottom: '0' }}
                     src={playlist.url}
-                    width="100%"
-                    height="200"
+                    width="80%"
+                    height="250px"
                     frameBorder="0"
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    allowFullScreen
                     loading="lazy"
                     ></iframe>
-                </div>
+                </div> 
           </p>
-          <button onClick={() => deletePlaylist(playlist.id)}>Delete</button>
+          <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
           <Share/>
         </Collapsible>
       ))}
+      </div>
     </div>
   );
 }
