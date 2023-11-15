@@ -1,4 +1,4 @@
-import { useNavigate, Link, useLocation, useParams } from "react-router-dom"
+import { useNavigate, Link, useLocation } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import '../../App.css'
 import axios from "axios"
@@ -21,6 +21,7 @@ function Navbar () {
     const navigate = useNavigate();
     const location = useLocation();
     const [newUserId, setNewUserId] = useState();
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         if (newUserId !== null) {
@@ -29,6 +30,11 @@ function Navbar () {
       }, [newUserId]);
 
     useEffect(() => {
+
+        const timeoutId = setTimeout(() => {
+            setShowPopup(true);
+          }, 3000);
+
         if (!users.length) {
             axios.get(`${userApi}/users`)
                 .then((response) => {
@@ -51,6 +57,9 @@ function Navbar () {
                 navigate("/");
             }
         }
+
+        return () => clearTimeout(timeoutId);
+
     }, [loggedin, location.pathname, navigate, users]);
 
     const updateUsernameFromStorage = () => {
@@ -142,12 +151,8 @@ function Navbar () {
             {loggedin && <div id="menu">
                 <Link id="link-menu" to={`/history/${id}`}>History</Link>
             </div>}
-            {location.pathname === "/" ? 
-                        <Popup id="popup" 
-                        modal
-                        nested
-                        open={popupOpen}
-                        onClose={closePopup}>
+            {location.pathname === "/" && showPopup ? 
+                        <Popup id="popup" modal nested open={popupOpen} onClose={closePopup}>
                         {(close) => (
                             <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>
                             {!loggedin || !username === "" ?(
@@ -197,7 +202,7 @@ function Navbar () {
                             </form>
                             )}
                         </Popup>
-                                    }
+            }
         </nav>
     )
 }
