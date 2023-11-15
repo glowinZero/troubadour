@@ -20,6 +20,13 @@ function Navbar () {
     const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+    const [newUserId, setNewUserId] = useState();
+
+    useEffect(() => {
+        if (newUserId !== null) {
+          localStorage.setItem("newUserId", newUserId);
+        }
+      }, [newUserId]);
 
     useEffect(() => {
         if (!users.length) {
@@ -70,6 +77,7 @@ function Navbar () {
 
 
         localStorage.setItem("username", inputUsername);
+        localStorage.setItem("userId", id);
         const requestBody = {username: inputUsername, password: password, name: name, email: email};
         formType === "signup" ? axios.post(`${userApi}/users`, requestBody).then(()=>{
             setLoggedin(true)
@@ -84,11 +92,11 @@ function Navbar () {
         }).catch(error=>{console.log(error)}) : axios.get(`${userApi}/users`).then((response)=>{
             setUsers(response.data)
             const userID = users.filter((user)=>{return (user.username === inputUsername)})
-            console.log(userID)
             setId(userID[0].id);
             if (users.some(user => user.username === inputUsername && user.password === password )) {
                 setLoggedin(true)
                 close();
+                localStorage.setItem("userId", userID[0].id);
                 navigate(`/mood/${userID[0].id}`)
             } else {
                 setInputUsername("");
@@ -115,16 +123,24 @@ function Navbar () {
         setPopupOpen(false);
     };
     const editUser = () =>{
-        console.log(id)
-        navigate(`/edit/${id}`)
-        setPopupOpen(false);
-        closePopup();
-    }
+        const storedUserId = localStorage.getItem("userId");
+        if (!id) {
+            setNewUserId(storedUserId);
+            navigate(`/edit/${storedUserId}`);
+        } else {
+            setNewUserId(null);
+            navigate(`/edit/${id}`);
+        }
+
+    setPopupOpen(false);
+    closePopup();
+  };
+
     return (
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-menu" to={`/playlists/${id}/:mood`}> Playlists</Link>
+                <Link id="link-menu" to={id ? `/playlists/${id}/:mood` : `/playlists/${newUserId}/:mood`}>Playlists</Link>
             </div>}
             {location.pathname === "/" ? 
                         <Popup id="popup" 
