@@ -17,7 +17,7 @@ function Playlists(){
     const [playlists, setPlaylists] = useState([])
     const [playlistLink, setPlaylistLink] = useState("")
     const scope = "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state"
-    const JSONLink = "http://localhost:5178/playlists"
+    const JSONLink = "https://troubadour-backend.onrender.com/playlists"
     const navigate = useNavigate();
     const {userId} = useParams();
     const {mood} = useParams();
@@ -104,7 +104,7 @@ function Playlists(){
         return () => {
           document.body.removeChild(script);
         };
-      }, [playlistLink,userId,JSONLink,playlistLink]);
+      }, [playlistLink,userId,JSONLink,playlistLink, mood]);
 
 
     

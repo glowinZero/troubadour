@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Collapsible from 'react-collapsible';
 import Share from '../SocialShare';
 import axios from 'axios';
-const JSONLink = "http://localhost:5178/playlists"
+const JSONLink = "https://troubadour-backend.onrender.com/playlists"
 
 function PlaylistHistory() {
   // eslint-disable-next-line no-unused-vars

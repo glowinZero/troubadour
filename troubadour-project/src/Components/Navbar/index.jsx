@@ -4,7 +4,7 @@ import '../../App.css'
 import axios from "axios"
 import { useEffect, useState } from "react"
 import logo from "../../../public/noun-banjo-5393194 (1).png"
-const userApi = "http://localhost:5178"
+const userApi = "https://troubadour-backend.onrender.com"
 
 
 function Navbar () {
