@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
-const userApi = "http://localhost:5178"
+const userApi = "https://troubadour-backend.onrender.com"
 
 function EditUser (){
     const user = useParams();
