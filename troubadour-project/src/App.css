@@ -1,5 +1,5 @@
 #root {
-  font-family:monospace;
+  font-family:Monaco;
   width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -7,13 +7,13 @@
 }
 
 body{
-  font-family:monospace;
+  font-family:Monaco;
   width: 100vh;
   height: 100vh;
 }
 
 #app{
-  font-family:monospace;
+  font-family:Monaco;
   position: relative;
   height: 100vh;
   background-color: rgb(24, 24, 24);
@@ -24,7 +24,7 @@ body{
 .blob-animation{
   position: relative;
   height: 100vh;
-  width: 80vw;
+  width: 200vw;
   rotate: rotate(90deg);
 }
 
@@ -33,14 +33,14 @@ body{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 50%;
   z-index: -2; 
   rotate: rotate(90deg);
 }
 
 .stop1 {
   stop-color: rgb(245, 36, 36);
-  transition: stop-color 2s ease-in-out;
+  transition: stop-color 5s ease-in-out;
 }
 
 .stop2 {
@@ -71,7 +71,7 @@ body{
 
 
 #navbar{
-  font-family:monospace;
+  font-family:Monaco;
   width: 100vw;
   color: white;
   height: 10vh;
@@ -278,8 +278,9 @@ body{
 }
 
 #home-page h1{
-  font-family:monospace;
+  font-family:Monaco;
   margin-top: 40vh;
+  font-size: 5rem;
   height: 100%;
   width: 100%;
 }
