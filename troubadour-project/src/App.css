@@ -181,6 +181,28 @@ body{
   height: 20px;
 }
 
+#name{
+  font-family:monospace;
+  border-radius: 5px;
+  border-style: none;
+  border: 1px solid black;
+  text-indent: 4%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: 20px;
+}
+
+#email {
+  font-family:monospace;
+  border-radius: 5px;
+  border-style: none;
+  border: 1px solid black;
+  text-indent: 4%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  height: 20px;
+}
+
 
 #popup{
   font-family:monospace;
