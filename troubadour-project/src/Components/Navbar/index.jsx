@@ -1,4 +1,4 @@
-import { useNavigate, Link, useLocation } from "react-router-dom"
+import { useNavigate, Link, useLocation, useParams } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import '../../App.css'
 import axios from "axios"
@@ -140,7 +140,7 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-menu" to={id ? `/playlists/${id}/:mood` : `/playlists/${newUserId}/:mood`}>Playlists</Link>
+                <Link id="link-menu" to={`/history/${id}`}>History</Link>
             </div>}
             {location.pathname === "/" ? 
                         <Popup id="popup" 

@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import Collapsible from 'react-collapsible';
 import Share from '../SocialShare';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 const JSONLink = "https://troubadour-backend.onrender.com/playlists"
 
 function PlaylistHistory() {
   // eslint-disable-next-line no-unused-vars
   const [playlists, setPlaylists] = useState([]);
+  const {userId} = useParams()
 
   useEffect (()=>{
     axios.get (JSONLink).then((response)=>{
@@ -27,7 +29,7 @@ function PlaylistHistory() {
     .catch((error) => console.error(error));
 };
 
-
+//apply filter by user id to display specific user history.
   return (
     <div id="list-playlists" key="playlistkey">
       {playlists.map((playlist) => (
