@@ -44,23 +44,24 @@ function PlaylistHistory() {
       <div id="historylist">
       {playlists.map((playlist) => (
         <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood}>
-          <p id="accordeonContent"style={{color: "white"}}>
+          <div id="accordeonContent"style={{color: "white"}}>
+          <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
+          <Share/>
 {/*             This is the content for the playlist with URL: {playlist.url}
  */}             <div id="embed-iframe">
                     <iframe
                     title="Spotify Playlist"
-                    style={{ borderRadius: '12px', marginRight: '10px', marginTop: '0px', marginBottom: '0' }}
+                    style={{ borderRadius: '12px', marginRight: '10px'}}
                     src={playlist.url}
                     width="80%"
-                    height="250px"
+                    height="200px"
                     frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
                     loading="lazy"
                     ></iframe>
                 </div> 
-          </p>
-          <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
-          <Share/>
+          </div>
+
         </Collapsible>
       ))}
       </div>

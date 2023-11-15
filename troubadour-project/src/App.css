@@ -411,14 +411,7 @@ select {
   font-family:Monaco;
   color: white;
   margin-top: 5vh;
-  max-height: 150px;
-  position: relative
-
-}
-
-#historylist p{
-  cursor: pointer;
-  transition: max-height 0.2s ease-out 0s;
+  max-height: 250px;
   position: relative
 
 }
@@ -431,10 +424,7 @@ select {
 #accordeon{
   font-family:monospace;
   background-color: grey;
-  color: white;
-  padding:0%;
-  position: relative
-
+  position: relative;
 }
 
 #accordeonContent{
