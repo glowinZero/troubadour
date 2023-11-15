@@ -84,6 +84,7 @@ function Playlists(){
         const newUser = localStorage.getItem("userId");
         const newMood = localStorage.getItem("mood");
         if(userId === ":userId" || mood === ":mood"){navigate(`/playlists/${newUser}/${newMood}`)}
+
         const script = document.createElement('script');
         script.src = 'https://open.spotify.com/embed/iframe-api/v1';
         script.async = true;
@@ -99,18 +100,6 @@ function Playlists(){
         {newMood && JSONLink && userId?
         searchArtist(newMood, JSONLink, userId, playlistLink )
         :console.log("none")} 
-          
-        
-
-/*         const savePlaylist = (savedMood) =>{
-            console.log("saveplaylist")
-            const requestBody = {
-                url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
-                modd: savedMood,
-                userId: userId
-            }
-            axios.post(JSONLink, requestBody)
-        } */
 
         return () => {
           document.body.removeChild(script);
@@ -121,15 +110,19 @@ function Playlists(){
     
     //If we dont have a token, user is prompted to login to spotify, so we can get it. If we are already logged in, the user can log out. 
     return (<div id="playlist-page">
-        <h1>Your Playlists</h1>
         {!token ?
-        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}>Login to Spotify</a>
-        : <button onClick={logout}>Logout</button>}
+        <div>
+        <h1>Please log into your Spotify to proceed</h1>
+        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}
+        >Take me to Spotify</a>
+        </div>
+        : <div></div>}
         {token?
         <div>
             {console.log('token defined:', token)}
             {playlists.playlists ?
             <div>
+                <h1>Your Playlists</h1>
                 {console.log(playlistLink, "playlistlink form")}
                 <div id="embed-iframe">
                     <iframe
@@ -149,7 +142,7 @@ function Playlists(){
                 {console.log('caught undefined')}
                 </div>}
         </div>
-        : <h2>Please Login</h2>}
+        : console.log("test")}
     </div>)
 }
 
