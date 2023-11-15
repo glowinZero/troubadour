@@ -429,6 +429,10 @@ select {
   position: absolute;
 }
 
+#playlist-page h1{
+  color: white;
+}
+
 #mood-button{
   font-family:monospace;
   cursor: pointer;
