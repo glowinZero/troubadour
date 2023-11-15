@@ -24,6 +24,7 @@ function HomePage() {
     const timeout = setTimeout(() => {
       // After the first animation (zoomIn), switch to the second animation (zoomOut)
       setAnimation('zoomOut');
+      
     }, 1200); // Set the delay to match the duration of the first animation
 
     return () => clearTimeout(timeout);
