@@ -13,6 +13,8 @@ function Navbar () {
     const [inputUsername, setInputUsername] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [formType, setFormType] = useState("login");
     const [loggedin, setLoggedin] = useState(false)
     const [popupOpen, setPopupOpen] = useState(false);
@@ -65,15 +67,24 @@ function Navbar () {
                   });
               }
           }
+
+
         localStorage.setItem("username", inputUsername);
-        const requestBody = {inputUsername, password};
+        const requestBody = {username: inputUsername, password: password, name: name, email: email};
         formType === "signup" ? axios.post(`${userApi}/users`, requestBody).then(()=>{
             setLoggedin(true)
-            close();
+            setInputUsername("");
+            setUsername("");
+            setPassword("")
+            setName("");
+            setEmail("")
+            localStorage.removeItem("username");
             window.location.reload();
+            close();
         }).catch(error=>{console.log(error)}) : axios.get(`${userApi}/users`).then((response)=>{
             setUsers(response.data)
             const userID = users.filter((user)=>{return (user.username === inputUsername)})
+            console.log(userID)
             setId(userID[0].id);
             if (users.some(user => user.username === inputUsername && user.password === password )) {
                 setLoggedin(true)
@@ -95,6 +106,7 @@ function Navbar () {
         navigate("/");
         setInputUsername("");
         setPassword("");
+        window.location.reload();
     };
     const openPopup = () => {
         setPopupOpen(true);
@@ -103,7 +115,7 @@ function Navbar () {
         setPopupOpen(false);
     };
     const editUser = () =>{
-        console.log("Navigating to edit page with id:", id);
+        console.log(id)
         navigate(`/edit/${id}`)
         setPopupOpen(false);
         closePopup();
@@ -112,7 +124,7 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-menu" to="/playlists/:userId/:mood"> Playlists</Link>
+                <Link id="link-menu" to={`/playlists/${id}/:mood`}> Playlists</Link>
             </div>}
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
             modal
@@ -127,6 +139,8 @@ function Navbar () {
                         <h4>{formType === "login" ? "login" : "signup"}</h4>
                         <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
                         <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
+                        {formType === "signup" ? <input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/> : console.log("login form")}
+                        {formType === "signup" ? <input id="name" type="name" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/> : console.log("login form")}
                         <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>
                         <button id="home-toggle" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account!" : "Don't have an account!"}</button>
                     </div>) : (

@@ -16,7 +16,7 @@ function EditUser (){
         axios.get(`${userApi}/users/${user.userId}`).then((response)=>{
             setloggedUser(response.data)
             console.log(loggedUser)
-        }).catch(error=>{console.log(error)})
+        }).catch(error=>{console.log(error) })
     }, [])
 
     const handleUpdate = ()=>{
@@ -31,7 +31,9 @@ function EditUser (){
 
     const deleteUser = () =>{
         axios.delete(`${userApi}/users/${user.userId}`)
+        localStorage.removeItem("username")
         navigate("/")
+        window.location.reload();
     }
     
     return(
