@@ -11,7 +11,7 @@ function Playlists(){
     //Variables
     const client_id = "57045c8caab548509de4307fd8995ec4"
     const client_secret = "f8275ac2c7944282a8c10a3b9a2b3ae8"
-    const redirect_URI = "http://localhost:5173/playlists/:userId/:mood"
+    const redirect_URI = "https://troubadour-backend.onrender.com:5173/playlists/:userId/:mood"
     const AUTH_END = "https://accounts.spotify.com/authorize"
     const response_type = "token"
     const [playlists, setPlaylists] = useState([])
