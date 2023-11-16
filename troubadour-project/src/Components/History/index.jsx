@@ -22,7 +22,7 @@ function PlaylistHistory() {
       })
     .catch(error=>
       {console.log(error)})
-  }, [])
+  }, [JSONLink])
 
   console.log(playlists)
 
