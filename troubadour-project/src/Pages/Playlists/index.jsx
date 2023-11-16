@@ -51,7 +51,7 @@ function Playlists() {
               userId: userId,
             };
             try {
-                await axios.post(JSONLink, requestBody);
+                await axios.post(`${JSONLink}`, requestBody);
                 console.log("Playlist saved successfully");
               } catch (error) {
                 console.error("Error saving playlist:", error);
