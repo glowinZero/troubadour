@@ -75,10 +75,6 @@ function Playlists(){
     };
 
     useEffect(() => {
-        const hash = window.location.hash
-        let token = window.localStorage.getItem("token")
-
-
         if(userId !== ":userId") {localStorage.setItem("userId", userId)}
         if(mood !== ":mood") {localStorage.setItem("mood", mood)}
         const newUser = localStorage.getItem("userId");
@@ -97,6 +93,8 @@ function Playlists(){
         }
         setToken(token)
         setSearchKey(newMood)   
+        const hash = window.location.hash
+        let token = window.localStorage.getItem("token")
         {newMood && JSONLink && userId?
         searchArtist(newMood, JSONLink, userId, playlistLink )
         :console.log("none")} 
@@ -113,7 +111,7 @@ function Playlists(){
         {!token ?
         <div>
         <h1>Please log into your Spotify to proceed</h1>
-        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}
+        <a     
         >Take me to Spotify</a>
         </div>
         : <div></div>}
