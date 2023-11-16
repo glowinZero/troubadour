@@ -104,6 +104,56 @@ function Playlists() {
     };
   }, [mood, userId]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://api.spotify.com/v1/search", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            q: searchKey,
+            type: "playlist",
+          },
+        });
+  
+        const data = response.data;
+        setPlaylists(data);
+  
+        if (data.playlists && data.playlists.items.length > 0) {
+          let randomIndex = Math.floor(Math.random() * 10);
+          const firstPlaylist = data.playlists.items[randomIndex];
+  
+          if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
+            const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
+            setPlaylistLink(playlistId);
+  
+            if (playlistId) {
+              const requestBody = {
+                url: `https://open.spotify.com/embed/playlist/${playlistId}`,
+                mood: searchKey,
+                userId: userId,
+              };
+  
+              try {
+                await axios.post(`${JSONLink}`, requestBody);
+                console.log("Playlist saved successfully");
+              } catch (error) {
+                console.error("Error saving playlist:", error);
+              }
+            }
+          }
+        } else {
+          console.log("No playlists found");
+        }
+      } catch (error) {
+        console.error("Error during artist search:", error);
+      }
+    };
+  
+    fetchData(); // Call the async function
+  }, [userId, searchKey, playlistLink]);
+
   // If we don't have a token, the user is prompted to log in to Spotify to get it.
   // If we are already logged in, the user can log out.
   return (
