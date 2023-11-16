@@ -21,7 +21,6 @@ function Navbar () {
     const navigate = useNavigate();
     const location = useLocation();
     const [newUserId, setNewUserId] = useState();
-    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         if (newUserId !== null) {
@@ -30,11 +29,6 @@ function Navbar () {
       }, [newUserId]);
 
     useEffect(() => {
-
-        const timeoutId = setTimeout(() => {
-            setShowPopup(true);
-          }, 3000);
-
         if (!users.length) {
             axios.get(`${userApi}/users`)
                 .then((response) => {
@@ -57,9 +51,6 @@ function Navbar () {
                 navigate("/");
             }
         }
-
-        return () => clearTimeout(timeoutId);
-
     }, [loggedin, location.pathname, navigate, users]);
 
     const updateUsernameFromStorage = () => {
@@ -150,9 +141,12 @@ function Navbar () {
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
                 <Link id="link-menu" to={`/history/${id}`}>History</Link>
-            </div>}
-            {location.pathname === "/" && showPopup ? 
-                        <Popup id="popup" modal nested open={popupOpen} onClose={closePopup}>
+            </div>} 
+            <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
+            modal
+            nested
+            open={popupOpen}
+            onClose={closePopup}>
                         {(close) => (
                             <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>
                             {!loggedin || !username === "" ?(
@@ -174,35 +168,7 @@ function Navbar () {
                                     )}
                             </form>
                             )}
-                        </Popup>
-                        :<Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
-                        modal
-                        nested
-                        open={popupOpen}
-                        onClose={closePopup}>
-                        {(close) => (
-                            <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>
-                            {!loggedin || !username === "" ?(
-                                <div id="form">
-                                    <button id="close-popup" onClick={() => close()}>x</button>
-                                    <h4>{formType === "login" ? "login" : "signup"}</h4>
-                                    <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
-                                    <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
-                                    <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>
-                                    <button id="home-toggle" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account!" : "Don't have an account!"}</button>
-                                </div>) : (
-                                    <div id="form">
-                                        <button id="close-popup" onClick={() => close()}>x</button>
-                                        {!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}
-                                        <p>Hi {username} !</p>
-                                        <button id="home-signup" type="button" onClick={()=>{logOut()}}>Logout</button>
-                                        <button id="home-toggle" type="button" onClick={()=>{editUser()}}>Edit account</button>
-                                    </div>
-                                    )}
-                            </form>
-                            )}
-                        </Popup>
-            }
+            </Popup>
         </nav>
     )
 }

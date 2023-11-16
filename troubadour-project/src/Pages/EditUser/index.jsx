@@ -44,8 +44,8 @@ function EditUser (){
                 <label>Username <input type="text" placeholder={loggedUser.username} value={username} onChange={e=>{setUsername(e.target.value)}}/></label>
                 <label>Password <input type="password" placeholder="********" value={password} onChange={e=>{setPassword(e.target.value)}}/></label>
                 <div id="buttons-edit-user">
-                    <label><button id="save-user" type="submit">Save changes</button></label>
-                    <label><button id="delete-user" type="submit" onClick={deleteUser}>Delete user</button></label>
+                    <label><button id="save-user" type="submit" >Save changes</button></label>
+                    <label><button id="delete-user" onClick={deleteUser}>Delete user</button></label>
                 </div>
             </form>
         </div>

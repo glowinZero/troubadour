@@ -51,7 +51,7 @@ body{
 
 
 .overlay-content {
-  font-family:monospace;
+  font-family:Monaco;
   position: fixed;
   top: 0;
   left: 0;
@@ -84,14 +84,14 @@ body{
 }
 
 #logo-bar{
-  font-family:monospace;
+  font-family:Monaco;
   width: 4vw;
   padding-top: 10px;
   padding-left: 20px;
 }
 
 #signup{
-  font-family:monospace;
+  font-family:Monaco;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,12 +100,12 @@ body{
 }
 
 #buttons-enter{
-  font-family:monospace;
+  font-family:Monaco;
   margin-right: 2;
 }
 
 #home-signup{
-  font-family:monospace;
+  font-family:Monaco;
   cursor: pointer;
   appearance: none;
   border: none;
@@ -119,7 +119,7 @@ body{
 }
 
 #home-toggle{
-  font-family:monospace;
+  font-family:Monaco;
   font-weight: bold;
   cursor: pointer;
   appearance: none;
@@ -150,17 +150,17 @@ body{
   padding: 20px;
   margin-right: 20px;
   border-radius: 20px;
-  font-family:monospace;
+  font-family:Monaco;
 }
 
 #form h4{
-  font-family:monospace;
+  font-family:Monaco;
   margin-bottom: 0px;
   margin-top: 0px;
 }
 
 #username{
-  font-family:monospace;
+  font-family:Monaco;
   border-radius: 5px;
   border-style: none;
   border: 1px solid black;
@@ -171,7 +171,7 @@ body{
 }
 
 #password{
-  font-family:monospace;
+  font-family:Monaco;
   border-radius: 5px;
   border-style: none;
   border: 1px solid black;
@@ -182,7 +182,7 @@ body{
 }
 
 #name{
-  font-family:monospace;
+  font-family:Monaco;
   border-radius: 5px;
   border-style: none;
   border: 1px solid black;
@@ -193,7 +193,7 @@ body{
 }
 
 #email {
-  font-family:monospace;
+  font-family:Monaco;
   border-radius: 5px;
   border-style: none;
   border: 1px solid black;
@@ -205,45 +205,23 @@ body{
 
 
 #popup{
-  font-family:monospace;
+  font-family:Monaco;
   all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
   margin-right: 20px;
   cursor: pointer;
   appearance: none;
   border: none;
   font-size: 15px;
   padding: 0;
-  width: 7%;
-}
-
-#popup:after,
-#popup:before {
-  backface-visibility: hidden;
-  border: 1px solid rgba(255, 255, 255, 0);
-  bottom: 0px;
-  content: " ";
-  display: block;
-  margin: -10px auto;
-  position: relative;
-  transition: all 280ms ease-in-out;
-  width: 0;
-  font-family:monospace;
-}
-
-#popup:hover:after,
-#popup:hover:before {
-  backface-visibility: hidden;
-  border-color: #fff;
-  transition: width 350ms ease-in-out;
-  width: 70%;
-  font-family:monospace;
-}
-
-#popup:hover:before {
-  bottom: auto;
-  top: 0;
-  width: 70%;
-  font-family:monospace;
+  width: 5%;
+  height: 60%;
+  text-align: center center;
+  color: black;
+  border-radius: 30px;
 }
 
 
@@ -258,7 +236,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family:monospace;
+  font-family:Monaco;
 }
 
 #home-page{
@@ -270,7 +248,7 @@ body{
   position: absolute;
   z-index: -1;
   color: white;
-  font-family:monospace;
+  font-family:Monaco;
 }
 
 #background{
@@ -286,7 +264,7 @@ body{
 }
 
 #mood-page{
-  font-family:monospace;
+  font-family:Monaco;
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -299,7 +277,7 @@ body{
 }
 
 select {
-  font-family:monospace;
+  font-family:Monaco;
   appearance: none;
   width: 10%;
   height: 5%;
@@ -314,28 +292,28 @@ select {
 }
 
 #mood-page button{
-  font-family:monospace;
+  font-family:Monaco;
   font-size: 15px;
 }
 
 #feeling-state{
-  font-family:monospace;
+  font-family:Monaco;
   color: white;
   margin-top: 10vh;
 }
 
 #feeling-dropdown{
-  font-family:monospace;
+  font-family:Monaco;
   gap: 30px;
 }
 
 #feeling-dropdown option{
-  font-family:monospace;
+  font-family:Monaco;
   appearance: none;
 }
 
 #edit-user{
-  font-family:monospace;
+  font-family:Monaco;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -347,7 +325,7 @@ select {
 }
 
 #form-edit-user{
-  font-family:monospace;
+  font-family:Monaco;
   display: flex;
   justify-content:center;
   align-items: center;
@@ -357,7 +335,7 @@ select {
 }
 
 #form-edit-user label{
-  font-family:monospace;
+  font-family:Monaco;
   display: flex;
   justify-content:center;
   align-items: center;
@@ -366,7 +344,7 @@ select {
 }
 
 #form-edit-user input{
-  font-family:monospace;
+  font-family:Monaco;
   margin-top: 1%;
   margin-bottom: 3%;
   width: 100%;
@@ -378,7 +356,7 @@ select {
 
 
 #buttons-edit-user{
-  font-family:monospace;
+  font-family:Monaco;  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -389,36 +367,36 @@ select {
 }
 
 #menu{
-  font-family:monospace;
+  font-family:Monaco;  
   color: white;
   text-decoration: none;
 }
 
 #link-menu{
-  font-family:monospace;
+  font-family:Monaco;  
   color: white;
   text-decoration: none;
 }
 
 #list-playlists{
-  font-family:monospace;
+  font-family:Monaco;  
   margin-top: 40vh;
   cursor: pointer;
 }
 
 #social-share{
-  font-family:monospace;
+  font-family:Monaco;  
   cursor: pointer;
 }
 
 #accordeon{
-  font-family:monospace;
+  font-family:Monaco;  
   background-color: grey;
   color: white;
 }
 
 #playlist-page{
-  font-family:monospace;
+  font-family:Monaco;  
   z-index: 5;
   height: 100vh;
   width: 100vw;
@@ -434,7 +412,7 @@ select {
 }
 
 #mood-button{
-  font-family:monospace;
+  font-family:Monaco;  
   cursor: pointer;
   appearance: none;
   border: none;
@@ -448,7 +426,7 @@ select {
 }
 
 #save-user{
-  font-family:monospace;
+  font-family:Monaco;  
   cursor: pointer;
   appearance: none;
   border: none;
@@ -462,7 +440,7 @@ select {
 }
 
 #delete-user{
-  font-family:monospace;
+  font-family:Monaco;  
   cursor: pointer;
   appearance: none;
   border: none;
