@@ -8,7 +8,7 @@ function Mood () {
     const [mood, setMood] = useState();
     const handleSubmit = ()=>{
         if (!mood){setMood(0)}
-        navigate(`https://fabulous-gnome-6f4332.netlify.app/playlists/${user.userId}/${mood}`) 
+        navigate(`/playlists/${user.userId}/${mood}`) 
     } 
 
     function moodChoice (e) {
