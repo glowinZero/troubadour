@@ -1,9 +1,6 @@
-import Login from "../Login"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import SpotifyPlayer from "react-spotify-web-playback"
 import { useNavigate, useParams } from "react-router-dom"
-import History from'../../Components/History'
 
 
 function Playlists(){
@@ -11,7 +8,7 @@ function Playlists(){
     //Variables
     const client_id = "57045c8caab548509de4307fd8995ec4"
     const client_secret = "f8275ac2c7944282a8c10a3b9a2b3ae8"
-    const redirect_URI = "https://fabulous-gnome-6f4332.netlify.app/playlists/:userId/:mood"
+    const redirect_URI = "https://fabulous-gnome-6f4332.netlify.app"
     const AUTH_END = "https://accounts.spotify.com/authorize"
     const response_type = "token"
     const [playlists, setPlaylists] = useState([])
