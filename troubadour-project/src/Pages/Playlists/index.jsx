@@ -50,7 +50,12 @@ function Playlists() {
               mood: searchMood,
               userId: userId,
             };
-            axios.post(JSONLink, requestBody);
+            try {
+                await axios.post(JSONLink, requestBody);
+                console.log("Playlist saved successfully");
+              } catch (error) {
+                console.error("Error saving playlist:", error);
+              }
           }
         }
       } else {
