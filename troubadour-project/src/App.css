@@ -25,7 +25,6 @@ body{
   position: relative;
   height: 100vh;
   width: 200vw;
-  rotate: rotate(90deg);
 }
 
 .blob-svg {
@@ -35,7 +34,8 @@ body{
   width: 100%;
   height: 50%;
   z-index: -2; 
-  rotate: rotate(90deg);
+  margin-left: 95vw;
+  margin-top: -165vh;
 }
 
 .stop1 {
@@ -68,20 +68,26 @@ body{
 }
 
 #home-page-info{
-  width: 30vw;
+  width: 40vw;
   text-align: left;
-  margin-top: 20vh;
+  margin-top: 30vh;
   margin-left: 10%;
   z-index: 16;
 }
 
 #home-page-info h2{
-  font-size: 30px;
+  font-size: 40px;
 }
 
 #home-page-info button{
   cursor: pointer;
   z-index: 20;
+}
+
+#home-page-info img{
+  width: 28vw;
+  margin-top: -60vh;
+  margin-left: 50vw;
 }
 
 #navbar{
