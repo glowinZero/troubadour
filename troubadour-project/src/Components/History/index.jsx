@@ -10,7 +10,6 @@ function PlaylistHistory() {
   // eslint-disable-next-line no-unused-vars
   const [playlists, setPlaylists] = useState([]);
   useEffect (()=>{
-    const userId = localStorage.getItem("userId")
     axios.get (JSONLink)
     .then((response)=>{
       setPlaylists((prevPlaylists) => {
