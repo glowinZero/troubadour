@@ -102,7 +102,7 @@ function Playlists(){
         return () => {
           document.body.removeChild(script);
         };
-      }, [playlistLink]);
+      }, []);
 
 
     
