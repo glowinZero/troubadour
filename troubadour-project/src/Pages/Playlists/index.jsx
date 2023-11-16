@@ -38,7 +38,6 @@ function Playlists() {
 
         if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
           const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
-          setPlaylistLink(playlistId);
 
           if (playlistId) {
             const requestBody = {
@@ -50,6 +49,12 @@ function Playlists() {
             try {
               await axios.post(`${JSONLink}`, requestBody);
               console.log("Playlist saved successfully");
+
+              // Use the callback form to update the state based on the previous state
+              setPlaylistLink(prevPlaylistLink => {
+                // Only update if the previous state matches the current playlistId
+                return prevPlaylistLink === playlistId ? '' : prevPlaylistLink;
+              });
             } catch (error) {
               console.error("Error saving playlist:", error);
             }
@@ -88,7 +93,6 @@ function Playlists() {
 
           if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
             const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
-            setPlaylistLink(playlistId);
 
             if (playlistId) {
               const requestBody = {
@@ -100,6 +104,12 @@ function Playlists() {
               try {
                 await axios.post(`${JSONLink}`, requestBody);
                 console.log("Playlist saved successfully");
+
+                // Use the callback form to update the state based on the previous state
+                setPlaylistLink(prevPlaylistLink => {
+                  // Only update if the previous state matches the current playlistId
+                  return prevPlaylistLink === playlistId ? '' : prevPlaylistLink;
+                });
               } catch (error) {
                 console.error("Error saving playlist:", error);
               }
@@ -154,7 +164,6 @@ function Playlists() {
       document.body.removeChild(script);
     };
   }, [mood, userId]);
-
   // If we don't have a token, the user is prompted to log in to Spotify to get it.
   // If we are already logged in, the user can log out.
   return (
