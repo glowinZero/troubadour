@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import SpotifyPlayer from "react-spotify-web-playback";
+import History from "../../Components/History";
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
@@ -9,15 +11,15 @@ function Playlists() {
   const response_type = "token";
   const [playlists, setPlaylists] = useState([]);
   const [playlistLink, setPlaylistLink] = useState("");
-  const scope =
-    "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state";
+  const scope = "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state";
   const JSONLink = "https://troubadour-backend.onrender.com/playlists";
   const navigate = useNavigate();
   const { userId, mood } = useParams();
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
+  const [playlistCreated, setPlaylistCreated] = useState(false);
 
-  const searchArtist = async (searchMood, userId, playlistLink) => {
+  const searchArtist = async (searchMood, userId) => {
     try {
       const response = await axios.get("https://api.spotify.com/v1/search", {
         headers: {
@@ -29,6 +31,7 @@ function Playlists() {
         },
       });
       const data = response.data;
+      setPlaylists(data);
 
       if (data.playlists && data.playlists.items.length > 0) {
         let randomIndex = Math.floor(Math.random() * 10);
@@ -38,9 +41,9 @@ function Playlists() {
           const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
           setPlaylistLink(playlistId);
 
-          if (playlistLink) {
+          if (playlistId) {
             const requestBody = {
-              url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+              url: `https://open.spotify.com/embed/playlist/${playlistId}`,
               mood: searchMood,
               userId: userId,
             };
@@ -60,56 +63,6 @@ function Playlists() {
       console.error("Error during artist search:", error);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://api.spotify.com/v1/search", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            q: searchKey || mood,
-            type: "playlist",
-          },
-        });
-
-        const data = response.data;
-        setPlaylists(data);
-
-        if (data.playlists && data.playlists.items.length > 0) {
-          let randomIndex = Math.floor(Math.random() * 10);
-          const firstPlaylist = data.playlists.items[randomIndex];
-
-          if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
-            const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
-            setPlaylistLink(playlistId);
-
-            if (playlistId) {
-              const requestBody = {
-                url: `https://open.spotify.com/embed/playlist/${playlistId}`,
-                mood: searchKey || mood,
-                userId: userId,
-              };
-
-              try {
-                await axios.post(`${JSONLink}`, requestBody);
-                console.log("Playlist saved successfully");
-              } catch (error) {
-                console.error("Error saving playlist:", error);
-              }
-            }
-          }
-        } else {
-          console.log("No playlists found");
-        }
-      } catch (error) {
-        console.error("Error during artist search:", error);
-      }
-    };
-
-    fetchData();
-  }, [userId, searchKey, mood, token]); 
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -137,8 +90,9 @@ function Playlists() {
     setToken(storedToken);
     setSearchKey(newMood);
 
-    if (newMood && JSONLink && userId) {
-      searchArtist(newMood, userId, playlistLink);
+    if (!playlistCreated && newMood && JSONLink && userId) {
+      searchArtist(newMood, userId);
+      setPlaylistCreated(true);
     } else {
       console.log("none");
     }
@@ -146,10 +100,8 @@ function Playlists() {
     return () => {
       document.body.removeChild(script);
     };
-  }, [mood, userId, playlistLink]);
+  }, [mood, userId, newMood, JSONLink, playlistCreated, searchArtist]);
 
-  // If we don't have a token, the user is prompted to log in to Spotify to get it.
-  // If we are already logged in, the user can log out.
   return (
     <div id="playlist-page">
       {!token ? (
