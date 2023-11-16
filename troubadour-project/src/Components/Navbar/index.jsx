@@ -18,7 +18,6 @@ function Navbar ({ showPopup, setShowPopup }) {
     const [name, setName] = useState("");
     const [formType, setFormType] = useState("login");
     const [loggedin, setLoggedin] = useState(false)
-    // eslint-disable-next-line no-unused-vars
     const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
@@ -99,6 +98,7 @@ function Navbar ({ showPopup, setShowPopup }) {
         }).catch(error=>{console.log(error)}) : axios.get(`${userApi}/users`).then((response)=>{
             setUsers(response.data)
             const userID = users.filter((user)=>{return (user.username === inputUsername)})
+            console.log("user to login", userID[0])
             setId(userID[0].id);
             if (users.some(user => user.username === inputUsername && user.password === password )) {
                 setLoggedin(true)
@@ -124,10 +124,10 @@ function Navbar ({ showPopup, setShowPopup }) {
         window.location.reload();
     };
     const openPopup = () => {
-        setShowPopup(true);
+        setPopupOpen(true);
     };
       const closePopup = () => {
-        setShowPopup(false);
+        setPopupOpen(false);
     };
     const editUser = () =>{
         const storedUserId = localStorage.getItem("userId");
@@ -152,7 +152,7 @@ function Navbar ({ showPopup, setShowPopup }) {
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
             modal
             nested
-            open={showPopup}
+            open={popupOpen}
             onClose={closePopup}>
                         {(close) => (
                             <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>
@@ -160,8 +160,8 @@ function Navbar ({ showPopup, setShowPopup }) {
                                 <div id="form">
                                     <button id="close-popup" onClick={() => close()}>x</button>
                                     <h4>{formType === "login" ? "login" : "signup"}</h4>
-                                    <label><input id="name" type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/></label>
-                                    <label><input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/></label>
+                                    {formType === "signup" ? <input id="name" type="name" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/> : console.log("login form")}
+                                    {formType === "signup" ? <input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/> : console.log("login form")}
                                     <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
                                     <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
                                     <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>
