@@ -160,6 +160,8 @@ function Navbar ({ showPopup, setShowPopup }) {
                                 <div id="form">
                                     <button id="close-popup" onClick={() => close()}>x</button>
                                     <h4>{formType === "login" ? "login" : "signup"}</h4>
+                                    <label><input id="name" type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/></label>
+                                    <label><input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/></label>
                                     <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
                                     <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
                                     <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>
