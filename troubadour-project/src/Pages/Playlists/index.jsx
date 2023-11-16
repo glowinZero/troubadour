@@ -44,7 +44,9 @@ function Playlists(){
     
             // Check if playlists and items exist before accessing them
             if (data.playlists && data.playlists.items.length > 0) {
-                const firstPlaylist = data.playlists.items[0];
+                let randomIndex = Math.floor(Math.random()*10)
+                const firstPlaylist = data.playlists.items[randomIndex];
+                console.log(firstPlaylist)
                 if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
                     // Extract the playlist ID
                     const playlistId = firstPlaylist.external_urls.spotify.split('/playlist/')[1];
