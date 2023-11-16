@@ -48,8 +48,6 @@ body{
   transition: stop-color 2s ease-in-out;
 }
 
-
-
 .overlay-content {
   font-family:Monaco;
   position: fixed;
@@ -69,6 +67,22 @@ body{
   z-index: -2;
 }
 
+#home-page-info{
+  width: 30vw;
+  text-align: left;
+  margin-top: 20vh;
+  margin-left: 10%;
+  z-index: 16;
+}
+
+#home-page-info h2{
+  font-size: 30px;
+}
+
+#home-page-info button{
+  cursor: pointer;
+  z-index: 20;
+}
 
 #navbar{
   font-family:Monaco;
@@ -227,7 +241,6 @@ body{
 
 .overlay {
   position: fixed;
-  position: center center;
   top: 0;
   left: 0;
   width: 100%;

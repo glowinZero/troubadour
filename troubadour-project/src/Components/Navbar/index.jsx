@@ -7,7 +7,8 @@ import logo from "../../../public/noun-banjo-5393194 (1).png"
 const userApi = "https://troubadour-backend.onrender.com"
 
 
-function Navbar () {
+// eslint-disable-next-line react/prop-types
+function Navbar ({ showPopup, setShowPopup }) {
     const [users, setUsers] = useState([]);
     const [id, setId] = useState();
     const [inputUsername, setInputUsername] = useState("");
@@ -21,6 +22,7 @@ function Navbar () {
     const navigate = useNavigate();
     const location = useLocation();
     const [newUserId, setNewUserId] = useState();
+    
 
     useEffect(() => {
         if (newUserId !== null) {
@@ -52,7 +54,11 @@ function Navbar () {
             }
         }
     }, [loggedin, location.pathname, navigate, users]);
-
+    
+    useEffect(() => {
+        setPopupOpen(showPopup);
+      }, [showPopup]);
+      
     const updateUsernameFromStorage = () => {
         const storedUsername = window.localStorage.getItem("username");
         if (storedUsername && !username) {
@@ -92,6 +98,7 @@ function Navbar () {
         }).catch(error=>{console.log(error)}) : axios.get(`${userApi}/users`).then((response)=>{
             setUsers(response.data)
             const userID = users.filter((user)=>{return (user.username === inputUsername)})
+            console.log("user to login", userID[0])
             setId(userID[0].id);
             if (users.some(user => user.username === inputUsername && user.password === password )) {
                 setLoggedin(true)
@@ -119,7 +126,7 @@ function Navbar () {
     const openPopup = () => {
         setPopupOpen(true);
     };
-    const closePopup = () => {
+      const closePopup = () => {
         setPopupOpen(false);
     };
     const editUser = () =>{
@@ -153,6 +160,8 @@ function Navbar () {
                                 <div id="form">
                                     <button id="close-popup" onClick={() => close()}>x</button>
                                     <h4>{formType === "login" ? "login" : "signup"}</h4>
+                                    {formType === "signup" ? <input id="name" type="name" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/> : console.log("login form")}
+                                    {formType === "signup" ? <input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/> : console.log("login form")}
                                     <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
                                     <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
                                     <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>

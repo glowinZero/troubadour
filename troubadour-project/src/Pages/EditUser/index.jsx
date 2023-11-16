@@ -15,30 +15,47 @@ function EditUser (){
     useEffect(() => {
         axios.get(`${userApi}/users/${user.userId}`).then((response)=>{
             setloggedUser(response.data)
-            console.log(loggedUser)
         }).catch(error=>{console.log(error) })
     }, [])
 
-    const handleUpdate = ()=>{
+
+    const handleUpdate = (e)=>{
+        e.preventDefault();
         const updateInfo = {
             name: !name ? loggedUser.name : name,
             email: !email ? loggedUser.email : email,
             username: !username ? loggedUser.username : username,
             password: !password ? loggedUser.password : password,
         };
-        axios.put(`${userApi}/users/${user.userId}`, updateInfo)
-    }
+        axios.put(`${userApi}/users/${user.userId}`, updateInfo).then((response) => {
+            setloggedUser(response.data);
+            setName("");
+            setEmail("");
+            setUsername("");
+            setPassword("");
+            alert("User information updated");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    } 
 
-    const deleteUser = () =>{
+    const deleteUser = () => {
         axios.delete(`${userApi}/users/${user.userId}`)
-        localStorage.removeItem("username")
-        navigate("/")
-        window.location.reload();
-    }
+          .then(() => {
+            localStorage.removeItem("username")
+            navigate("/")
+            window.location.reload()
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      
     
     return(
         <div id="edit-user">
-            <form id="form-edit-user"onSubmit={e=>{handleUpdate(e)}}>
+            <form id="form-edit-user" onSubmit={handleUpdate}>
                 <label>Name <input id="name" type="text" placeholder={loggedUser.name} value={name} onChange={e=>{setName(e.target.value)}}/></label>
                 <label>Email <input type="email" placeholder={loggedUser.email} value={email} onChange={e=>{setEmail(e.target.value)}}/></label>
                 <label>Username <input type="text" placeholder={loggedUser.username} value={username} onChange={e=>{setUsername(e.target.value)}}/></label>

@@ -1,9 +1,6 @@
-import Login from "../Login"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import SpotifyPlayer from "react-spotify-web-playback"
 import { useNavigate, useParams } from "react-router-dom"
-import History from'../../Components/History'
 
 
 function Playlists(){
@@ -35,7 +32,8 @@ function Playlists(){
         try {
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 },
                 params: {
                     q: searchMood,
@@ -70,7 +68,7 @@ function Playlists(){
             }
 
         } catch (error) {
-            console.error("Error during artist search:", error);
+            console.log("Error during artist search:", error);
         }
     };
 
