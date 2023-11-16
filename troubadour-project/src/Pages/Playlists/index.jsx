@@ -67,7 +67,7 @@ function Playlists(){
             }
 
         } catch (error) {
-            console.error("Error during artist search:", error);
+            console.log("Error during artist search:", error);
         }
     };
 
