@@ -14,12 +14,13 @@ function PlaylistHistory() {
     .then((response)=>{
       setPlaylists((prevPlaylists) => {
         const filteredPlaylist = response.data.filter((playlist)=>
-          playlist.userId.includes(1)
+          playlist.userId.includes(userId)
           );
           return filteredPlaylist
         });
       })
-    .catch(error=>{console.log(error)})
+    .catch(error=>
+      {console.log(error)})
   }, [JSONLink, userId])
 
   console.log(playlists)
