@@ -102,7 +102,7 @@ function Playlists() {
     return () => {
       document.body.removeChild(script);
     };
-  }, [mood]);
+  }, [mood, playlistLink]);
 
   // If we don't have a token, the user is prompted to log in to Spotify to get it.
   // If we are already logged in, the user can log out.
