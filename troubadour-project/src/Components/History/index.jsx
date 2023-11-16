@@ -5,11 +5,12 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 const JSONLink = "https://troubadour-backend.onrender.com/playlists"
 
+
 function PlaylistHistory() {
   // eslint-disable-next-line no-unused-vars
   const [playlists, setPlaylists] = useState([]);
-  const {userId} = useParams()
   useEffect (()=>{
+    const userId = localStorage.getItem("userId")
     axios.get (JSONLink)
     .then((response)=>{
       setPlaylists((prevPlaylists) => {
@@ -21,7 +22,7 @@ function PlaylistHistory() {
       })
     .catch(error=>
       {console.log(error)})
-  }, [JSONLink, userId])
+  }, [JSONLink])
 
   console.log(playlists)
 
