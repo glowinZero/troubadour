@@ -32,7 +32,8 @@ function Playlists(){
         try {
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 },
                 params: {
                     q: searchMood,
