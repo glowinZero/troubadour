@@ -7,7 +7,8 @@ import logo from "../../../public/noun-banjo-5393194 (1).png"
 const userApi = "https://troubadour-backend.onrender.com"
 
 
-function Navbar () {
+// eslint-disable-next-line react/prop-types
+function Navbar ({ showPopup, setShowPopup }) {
     const [users, setUsers] = useState([]);
     const [id, setId] = useState();
     const [inputUsername, setInputUsername] = useState("");
@@ -17,10 +18,12 @@ function Navbar () {
     const [name, setName] = useState("");
     const [formType, setFormType] = useState("login");
     const [loggedin, setLoggedin] = useState(false)
+    // eslint-disable-next-line no-unused-vars
     const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const [newUserId, setNewUserId] = useState();
+    
 
     useEffect(() => {
         if (newUserId !== null) {
@@ -52,7 +55,11 @@ function Navbar () {
             }
         }
     }, [loggedin, location.pathname, navigate, users]);
-
+    
+    useEffect(() => {
+        setPopupOpen(showPopup);
+      }, [showPopup]);
+      
     const updateUsernameFromStorage = () => {
         const storedUsername = window.localStorage.getItem("username");
         if (storedUsername && !username) {
@@ -117,10 +124,10 @@ function Navbar () {
         window.location.reload();
     };
     const openPopup = () => {
-        setPopupOpen(true);
+        setShowPopup(true);
     };
-    const closePopup = () => {
-        setPopupOpen(false);
+      const closePopup = () => {
+        setShowPopup(false);
     };
     const editUser = () =>{
         const storedUserId = localStorage.getItem("userId");
@@ -145,7 +152,7 @@ function Navbar () {
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>login</p> : <p>{username}</p>}</button>}
             modal
             nested
-            open={popupOpen}
+            open={showPopup}
             onClose={closePopup}>
                         {(close) => (
                             <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>

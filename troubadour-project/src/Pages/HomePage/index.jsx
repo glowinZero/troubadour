@@ -1,41 +1,21 @@
-import { useState, useEffect } from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import { zoomIn, zoomOut } from 'react-animations';
+import { useState } from 'react';
 import Navbar from '../../Components/Navbar';
 
-const zoomInAnimation = keyframes`${zoomIn}`;
-const zoomOutAnimation = keyframes`${zoomOut}`;
-
-const ZoomInOut = styled.div`
-  ${({ animation }) =>
-    animation === 'zoomIn'
-      ? css`
-          animation: ${zoomInAnimation} 1s forwards;
-        `
-      : css`
-          animation: ${zoomOutAnimation} 3s forwards;
-        `}
-`;
-
 function HomePage() {
-  const [animation, setAnimation] = useState('zoomIn');
+  const [showPopup, setShowPopup] = useState(false);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      // After the first animation (zoomIn), switch to the second animation (zoomOut)
-      setAnimation('zoomOut');
-      
-    }, 1200); // Set the delay to match the duration of the first animation
-
-    return () => clearTimeout(timeout);
-  }, []);
+  const handleClick = () =>{
+    setShowPopup(true);
+  }
 
   return (
     <div id="home-page">
-      <ZoomInOut animation={animation}>
-        <h1>Troubadour</h1>
-      </ZoomInOut>
-      <Navbar/>
+    <div id="home-page-info">
+        <h2>Mood Magic Unleashed: Playlists Tailored Just for You!</h2>
+        <p>Dive into a musical journey with Troubadour! Our playlists go beyond music; they are your personal mood maestros. Let the beats sync with your emotions, transforming each day into a symphony of sound. Explore the joy of personalized playlists, where your mood finds its perfect melody!</p>
+        <button type="submit" onClick={handleClick}>Get started!</button>
+    </div>
+      <Navbar showPopup={showPopup} setShowPopup={setShowPopup} />
     </div>
   );
 }
