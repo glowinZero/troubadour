@@ -143,8 +143,8 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-menu" to={`/history/${id}`}>History</Link>
-                <Link id="link-menu" to={`/mood/${id}`}>Create Playlist</Link>
+                <Link id="link-history" to={`/history/${id}`}>History</Link>
+                <Link id="link-mood" to={`/mood/${id}`}>Create Playlist</Link>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
             modal

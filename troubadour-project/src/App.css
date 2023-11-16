@@ -101,6 +101,7 @@ body{
   justify-content: space-between;
   align-items: center;
   z-index: 8;
+  gap: 2%;
 }
 
 #logo-bar{
@@ -236,8 +237,9 @@ body{
   appearance: none;
   border: none;
   font-size: 15px;
-  padding: 0;
-  width: 5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  width: fit-content;
   height: 60%;
   text-align: center center;
   color: black;
@@ -471,12 +473,29 @@ select::after {
   font-family:Monaco;  
   color: white;
   text-decoration: none;
+  width: 30%;
+  margin-left: 3.4%;
 }
 
-#link-menu{
+#link-history{
   font-family:Monaco;  
   color: white;
   text-decoration: none;
+  margin-right: 5%;
+  padding-bottom: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+  border-bottom: 1px solid white;
+}
+
+#link-mood{
+  font-family:Monaco;  
+  color: white;
+  text-decoration: none;
+  padding-bottom: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
+  border-bottom: 1px solid white;
 }
 
 #history {
