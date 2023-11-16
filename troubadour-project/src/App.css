@@ -378,10 +378,20 @@ select {
   text-decoration: none;
 }
 
-#list-playlists{
-  font-family:Monaco;  
+#history {
+  font-family:Monaco;
+  color: white;
   margin-top: 40vh;
   cursor: pointer;
+}
+
+#historylist{
+  font-family:Monaco;
+  color: white;
+  margin-top: 5vh;
+  max-height: 250px;
+  position: relative
+
 }
 
 #social-share{
@@ -392,8 +402,14 @@ select {
 #accordeon{
   font-family:Monaco;  
   background-color: grey;
-  color: white;
+  position: relative;
 }
+
+#accordeonContent{
+  padding:0%;
+}
+
+
 
 #playlist-page{
   font-family:Monaco;  
