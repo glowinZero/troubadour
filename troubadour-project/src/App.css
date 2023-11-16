@@ -501,7 +501,6 @@ select::after {
 #history {
   font-family:Monaco;
   color: white;
-  margin-top: 40vh;
   cursor: pointer;
 }
 
@@ -509,9 +508,8 @@ select::after {
   font-family:Monaco;
   color: white;
   margin-top: 5vh;
-  max-height: 250px;
+  max-height: 500px;
   position: relative
-
 }
 
 #social-share{
