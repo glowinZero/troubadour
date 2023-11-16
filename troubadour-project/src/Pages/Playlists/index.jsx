@@ -1,6 +1,9 @@
+import Login from "../Login"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import SpotifyPlayer from "react-spotify-web-playback"
 import { useNavigate, useParams } from "react-router-dom"
+import History from'../../Components/History'
 
 
 function Playlists(){
@@ -8,7 +11,7 @@ function Playlists(){
     //Variables
     const client_id = "57045c8caab548509de4307fd8995ec4"
     const client_secret = "f8275ac2c7944282a8c10a3b9a2b3ae8"
-    const redirect_URI = "https://fabulous-gnome-6f4332.netlify.app/playlists/:userId/:mood"
+    const redirect_URI = "http://https://fabulous-gnome-6f4332.netlify.app/playlists/:userId/:mood"
     const AUTH_END = "https://accounts.spotify.com/authorize"
     const response_type = "token"
     const [playlists, setPlaylists] = useState([])
@@ -32,8 +35,7 @@ function Playlists(){
         try {
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
                 params: {
                     q: searchMood,
@@ -68,11 +70,15 @@ function Playlists(){
             }
 
         } catch (error) {
-            console.log("Error during artist search:", error);
+            console.error("Error during artist search:", error);
         }
     };
 
     useEffect(() => {
+        const hash = window.location.hash
+        let token = window.localStorage.getItem("token")
+
+
         if(userId !== ":userId") {localStorage.setItem("userId", userId)}
         if(mood !== ":mood") {localStorage.setItem("mood", mood)}
         const newUser = localStorage.getItem("userId");
@@ -91,8 +97,6 @@ function Playlists(){
         }
         setToken(token)
         setSearchKey(newMood)   
-        const hash = window.location.hash
-        let token = window.localStorage.getItem("token")
         {newMood && JSONLink && userId?
         searchArtist(newMood, JSONLink, userId, playlistLink )
         :console.log("none")} 
@@ -109,7 +113,7 @@ function Playlists(){
         {!token ?
         <div>
         <h1>Please log into your Spotify to proceed</h1>
-        <a     
+        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}
         >Take me to Spotify</a>
         </div>
         : <div></div>}

@@ -8,7 +8,7 @@ const userApi = "https://troubadour-backend.onrender.com"
 
 
 // eslint-disable-next-line react/prop-types
-function Navbar ({ showPopup, setShowPopup }) {
+function Navbar () {
     const [users, setUsers] = useState([]);
     const [id, setId] = useState();
     const [inputUsername, setInputUsername] = useState("");
@@ -55,10 +55,6 @@ function Navbar ({ showPopup, setShowPopup }) {
         }
     }, [loggedin, location.pathname, navigate, users]);
     
-    useEffect(() => {
-        setPopupOpen(showPopup);
-      }, [showPopup]);
-      
     const updateUsernameFromStorage = () => {
         const storedUsername = window.localStorage.getItem("username");
         if (storedUsername && !username) {
