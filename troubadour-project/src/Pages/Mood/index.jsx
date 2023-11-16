@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState } from "react";
+import BlobAnimation from "../../Components/Background";
 
 function Mood () {
     const navigate = useNavigate()
@@ -16,13 +17,15 @@ function Mood () {
 
     return(
         <div id="mood-page">
-            <p id="feeling-state">How are you feeling today?</p>
-            <select id="feeling-dropdown" name="How are you feeling today?" defaultValue={0} onChange={moodChoice}>
-                <option value={"neutral"}>Neutral</option>
-                <option value={"happy"}>Happy</option>
-                <option value={"sad"}>Sad</option>
-            </select>
-            <button id="mood-button" onClick={()=>handleSubmit()}>Submit</button>
+            <div id="mood-page-info">
+                <p id="feeling-state">I am feeling <select id="feeling-dropdown" name="How are you feeling today?" defaultValue={0} onChange={moodChoice}>
+                    <option value={"neutral"}>Neutral</option>
+                    <option value={"happy"}>Happy</option>
+                    <option value={"sad"}>Sad</option>
+                </select> today</p>
+                <button id="mood-button" onClick={()=>handleSubmit()}>submit</button>
+            </div>
+            <BlobAnimation />
         </div>
     )
 }

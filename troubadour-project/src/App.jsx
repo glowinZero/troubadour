@@ -7,7 +7,6 @@ import Mood from './Pages/Mood'
 import EditUser from './Pages/EditUser'
 import PlaylistHistory from './Components/History'
 import Share from './Components/SocialShare'
-import BlobAnimation from './Components/Background'
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
           <Route path="/history/:userId" element={<PlaylistHistory/>}/>
           <Route path="/socialShare" element={<Share/>}/>
         </Routes>
-        <BlobAnimation id="background"/>
       </div>
     </div>
   )

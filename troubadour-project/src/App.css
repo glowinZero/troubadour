@@ -21,23 +21,6 @@ body{
   width: 100vw;
 }
 
-.blob-animation{
-  position: relative;
-  height: 100vh;
-  width: 200vw;
-}
-
-.blob-svg {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  z-index: -2; 
-  margin-left: 95vw;
-  margin-top: -165vh;
-}
-
 .stop1 {
   stop-color: rgb(245, 36, 36);
   transition: stop-color 5s ease-in-out;
@@ -88,6 +71,23 @@ body{
   width: 28vw;
   margin-top: -60vh;
   margin-left: 50vw;
+}
+
+#home-page .blob-animation{
+  position: absolute;
+  height: 100vh;
+  width: 200vw;
+}
+
+#home-page .blob-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: -2; 
+  margin-left: 48vw;
+  margin-top: -165vh;
 }
 
 #navbar{
@@ -261,11 +261,6 @@ body{
 #home-page{
   width: 100%;
   height: 100%;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position:center;
-  position: absolute;
-  z-index: -1;
   color: white;
   font-family:Monaco;
 }
@@ -295,40 +290,127 @@ body{
   font-size: 30px;
 }
 
+#mood-page .blob-animation{
+  position: relative;
+  height: 100vh;
+  width: 200vw;
+}
+
+#mood-page .blob-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: -2; 
+}
+
+#background-mood-page{
+  position: absolute;
+}
+
+#mood-page img{
+  width: 50vw;
+  position: absolute;
+  z-index: -2;
+}
+
 select {
-  font-family:Monaco;
+  font-family: Monaco;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
   appearance: none;
-  width: 10%;
+  width: 5%;
   height: 5%;
   font-size: 1.15rem;
   text-indent: 2%;
-  background-color: #fff;
-  border: 1px solid #caced1;
+  border: none;
   border-radius: 0.25rem;
-  color: #000;
+  color: rgb(161, 174, 177);
   margin-bottom: 2%;
   text-align: center;
+  outline: none; 
+  background-color: rgba(0, 0, 0, 0);
+}
+
+select option {
+  background-color: rgb(24, 24, 24);
+  color: rgb(250, 250, 250);
+  font-size: 15px;
+  padding: 10px;
+}
+
+option:hover,
+option:focus {
+  background-color: rgb(24, 24, 24);
+}
+
+select option:checked {
+  background-color: rgb(24, 24, 24);
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select::-moz-focus-inner {
+  border: 0;
+}
+
+select:focus {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+select::after {
+  content: '\25BC'; 
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: white;
 }
 
 #mood-page button{
   font-family:Monaco;
   font-size: 15px;
+  height: 15%;
+  width: 40%;
 }
 
 #feeling-state{
   font-family:Monaco;
   color: white;
-  margin-top: 10vh;
+  margin-bottom: 5%;
+  width: 100%;
+  margin-top: 0vh;
 }
 
 #feeling-dropdown{
   font-family:Monaco;
-  gap: 30px;
+  height: 60%;
+  width: 20%;
+  font-size: 22px;
 }
 
 #feeling-dropdown option{
   font-family:Monaco;
   appearance: none;
+}
+
+#mood-page-info{
+  font-family:Monaco;
+  width: 30vw;
+  height: 40vh;
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  border-radius: 20px;
 }
 
 #edit-user{
@@ -455,9 +537,9 @@ select {
   padding: 0;
   width: 10.1%;
   height: 30px;
-  background-color: white;
-  color: black;
-  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.103);
+  box-shadow: 2px 2px 10px rgb(0, 0, 0);
+  color: white;
 }
 
 #save-user{
