@@ -16,10 +16,8 @@ function Playlists() {
   const { userId, mood } = useParams();
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const searchArtist = async (searchMood, userId) => {
-    setIsLoading(true);
+  const searchArtist = async (searchMood, userId, playlistLink) => {
     try {
       const response = await axios.get("https://api.spotify.com/v1/search", {
         headers: {
@@ -38,10 +36,11 @@ function Playlists() {
 
         if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
           const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
+          setPlaylistLink(playlistId);
 
-          if (playlistId) {
+          if (playlistLink) {
             const requestBody = {
-              url: `https://open.spotify.com/embed/playlist/${playlistId}`,
+              url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
               mood: searchMood,
               userId: userId,
             };
@@ -49,12 +48,6 @@ function Playlists() {
             try {
               await axios.post(`${JSONLink}`, requestBody);
               console.log("Playlist saved successfully");
-
-              // Use the callback form to update the state based on the previous state
-              setPlaylistLink(prevPlaylistLink => {
-                // Only update if the previous state matches the current playlistId
-                return prevPlaylistLink === playlistId ? '' : prevPlaylistLink;
-              });
             } catch (error) {
               console.error("Error saving playlist:", error);
             }
@@ -65,14 +58,11 @@ function Playlists() {
       }
     } catch (error) {
       console.error("Error during artist search:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       try {
         const response = await axios.get("https://api.spotify.com/v1/search", {
           headers: {
@@ -93,6 +83,7 @@ function Playlists() {
 
           if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
             const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
+            setPlaylistLink(playlistId);
 
             if (playlistId) {
               const requestBody = {
@@ -104,12 +95,6 @@ function Playlists() {
               try {
                 await axios.post(`${JSONLink}`, requestBody);
                 console.log("Playlist saved successfully");
-
-                // Use the callback form to update the state based on the previous state
-                setPlaylistLink(prevPlaylistLink => {
-                  // Only update if the previous state matches the current playlistId
-                  return prevPlaylistLink === playlistId ? '' : prevPlaylistLink;
-                });
               } catch (error) {
                 console.error("Error saving playlist:", error);
               }
@@ -120,13 +105,11 @@ function Playlists() {
         }
       } catch (error) {
         console.error("Error during artist search:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [userId, searchKey, mood, token]);
+  }, [userId, searchKey, mood, token]); // Include all relevant dependencies
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -155,7 +138,7 @@ function Playlists() {
     setSearchKey(newMood);
 
     if (newMood && JSONLink && userId) {
-      searchArtist(newMood, userId);
+      searchArtist(newMood, userId, playlistLink);
     } else {
       console.log("none");
     }
@@ -163,7 +146,8 @@ function Playlists() {
     return () => {
       document.body.removeChild(script);
     };
-  }, [mood, userId]);
+  }, [mood, userId, playlistLink]);
+
   // If we don't have a token, the user is prompted to log in to Spotify to get it.
   // If we are already logged in, the user can log out.
   return (
