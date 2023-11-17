@@ -17,9 +17,8 @@ function Playlists() {
   const { userId, mood } = useParams();
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
-  const [savingPlaylist, setSavingPlaylist] = useState(false); // Added state to track saving status
 
-  const searchArtist = async (searchMood, userId, playlistLink) => {
+  const searchArtist = async (searchMood) => {
     try {
       const response = await axios.get("https://api.spotify.com/v1/search", {
         headers: {
@@ -48,11 +47,6 @@ function Playlists() {
     } catch (error) {
       console.error("Error during artist search:", error);
     }
-  };
-
-  const handleSavePlaylist = () => {
-    setSavingPlaylist(true); // Set saving status to true when the button is clicked
-    setSearchKey(mood); // Update searchKey to trigger useEffect
   };
 
   useEffect(() => {

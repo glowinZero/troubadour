@@ -539,6 +539,7 @@ select::after {
 
 #embed-iframe{
   background-color: #303030;
+  height: 60vh;
 }
 
 #playlist-page h1{

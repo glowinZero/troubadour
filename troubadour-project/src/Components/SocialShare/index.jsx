@@ -1,10 +1,12 @@
+import { useParams } from "react-router-dom";
 import {
     WhatsappShareButton,
     WhatsappIcon,
   } from "react-share";
 
 function Share (){
-    const shareUrl = "https://spotify/happy-playlist"
+    const {link} = useParams();
+    const shareUrl = `${link}`
     return(
         <div id="social-share">
             <WhatsappShareButton url={shareUrl}
