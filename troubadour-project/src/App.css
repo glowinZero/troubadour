@@ -536,12 +536,15 @@ select::after {
   align-items: center;
   flex-direction: column;
   position: absolute;
+  background-color: #303030;
 }
 
 #embed-iframe{
   background-color: #303030;
   height: 60vh;
 }
+
+#frame
 
 #playlist-page h1{
   color: white;

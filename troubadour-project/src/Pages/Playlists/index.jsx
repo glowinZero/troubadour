@@ -142,11 +142,12 @@ function Playlists() {
               {console.log(playlistLink, "playlistlink form")}
               <div id="embed-iframe">
                 <iframe
+                  id="frame"
                   title="Spotify Playlist"
                   style={{ borderRadius: "12px", marginRight: "200px" }}
                   src={`https://open.spotify.com/embed/playlist/${playlistLink}`}
                   width="100%"
-                  height="300"
+                  height="380"
                   frameBorder="0"
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   allowFullScreen
