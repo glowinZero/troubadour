@@ -49,8 +49,7 @@ function PlaylistHistory() {
           <div id="accordeonContent"style={{color: "white"}}>
           <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
           <Share/>
-{/*             This is the content for the playlist with URL: {playlist.url}
- */}             <div id="embed-iframe">
+            <div id="embed-iframe">
                     <iframe
                     title="Spotify Playlist"
                     style={{ borderRadius: '12px', marginRight: '10px'}}
