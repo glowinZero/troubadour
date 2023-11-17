@@ -154,7 +154,7 @@ function Playlists() {
                   loading="lazy"
                 ></iframe>
                 <div id="social-share">
-                  <WhatsappShareButton url={`https://open.spotify.com/embed/playlist/${playlistLink}`}
+                  <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`}
                     title={"I'm sharing with you my playlist of the day!"}
                     separator={" "}>
                     <p id="share-button">Share in Whatsapp</p>
