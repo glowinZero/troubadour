@@ -22,6 +22,7 @@ function Navbar () {
     const navigate = useNavigate();
     const location = useLocation();
     const [newUserId, setNewUserId] = useState();
+    const [storedUser, setStoredUser] = useState();
     
 
     useEffect(() => {
@@ -127,10 +128,10 @@ function Navbar () {
         setPopupOpen(false);
     };
     const editUser = () =>{
-        const storedUserId = localStorage.getItem("userId");
+        setStoredUser(localStorage.getItem("userId"));
         if (!id) {
-            setNewUserId(storedUserId);
-            navigate(`/edit/${storedUserId}`);
+            setNewUserId(storedUser);
+            navigate(`/edit/${storedUser}`);
         } else {
             setNewUserId(null);
             navigate(`/edit/${id}`);
@@ -144,7 +145,7 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-mood" to={`/mood/${newUserId}`}>Create Playlist</Link>
+                <Link id="link-mood" to={`/mood/${storedUser}`}>Create Playlist</Link>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
             modal
