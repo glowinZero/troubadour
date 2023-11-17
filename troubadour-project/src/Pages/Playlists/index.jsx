@@ -17,7 +17,7 @@ function Playlists() {
   const { userId, mood } = useParams();
   const [token, setToken] = useState("");
   const [searchKey, setSearchKey] = useState("");
-  const [playlistCreated, setPlaylistCreated] = useState(false);
+const [playlistCreated, setPlaylistCreated] = useState(false);
 
   const searchArtist = async (searchMood, userId) => {
     try {
@@ -31,7 +31,7 @@ function Playlists() {
         },
       });
       const data = response.data;
-      setPlaylists(data);
+setPlaylists(data);
 
       if (data.playlists && data.playlists.items.length > 0) {
         let randomIndex = Math.floor(Math.random() * 10);
@@ -41,7 +41,7 @@ function Playlists() {
           const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
           setPlaylistLink(playlistId);
 
-          if (playlistId) {
+if (playlistId) {
             const requestBody = {
               url: `https://open.spotify.com/embed/playlist/${playlistId}`,
               mood: searchMood,
@@ -118,10 +118,11 @@ function Playlists() {
           {console.log("token defined:", token)}
           {playlists.playlists ? (
             <div>
-              <h1>Your Playlists</h1>
+              <h1 id="playlist-title">Your Playlist of today</h1>
               {console.log(playlistLink, "playlistlink form")}
               <div id="embed-iframe">
                 <iframe
+                  id="frame"
                   title="Spotify Playlist"
                   style={{ borderRadius: "12px", marginRight: "200px" }}
                   src={`https://open.spotify.com/embed/playlist/${playlistLink}`}
@@ -132,14 +133,14 @@ function Playlists() {
                   allowFullScreen
                   loading="lazy"
                 ></iframe>
-              </div>
+                              </div>
             </div>
           ) : (
             <div>{console.log("caught undefined")}</div>
           )}
         </div>
       )}
-    </div>
+          </div>
   );
 }
 
