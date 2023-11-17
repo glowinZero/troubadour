@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Collapsible from "react-collapsible";
-import Share from "./Share"; // Assuming you have a Share component
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
