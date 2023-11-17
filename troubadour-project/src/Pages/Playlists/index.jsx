@@ -91,21 +91,6 @@ function Playlists() {
           if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
             const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
             setPlaylistLink(playlistId);
-
-            if (playlistId) {
-              const requestBody = {
-                url: `https://open.spotify.com/embed/playlist/${playlistId}`,
-                mood: searchKey || mood,
-                userId: userId,
-              };
-
-              try {
-                await axios.post(`${JSONLink}`, requestBody);
-                console.log("Playlist saved successfully");
-              } catch (error) {
-                console.error("Error saving playlist:", error);
-              }
-            }
           }
         } else {
           console.log("No playlists found");
