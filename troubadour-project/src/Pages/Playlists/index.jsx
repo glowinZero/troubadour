@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Share from "../../Components/SocialShare";
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
@@ -40,20 +41,6 @@ function Playlists() {
           const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
           setPlaylistLink(playlistId);
 
-          if (playlistLink) {
-            const requestBody = {
-              url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
-              mood: searchMood,
-              userId: userId,
-            };
-
-            try {
-              await axios.post(`${JSONLink}`, requestBody);
-              console.log("Playlist saved successfully");
-            } catch (error) {
-              console.error("Error saving playlist:", error);
-            }
-          }
         }
       } else {
         console.log("No playlists found");
@@ -172,9 +159,7 @@ function Playlists() {
                   loading="lazy"
                 ></iframe>
               </div>
-              <button onClick={handleSavePlaylist} disabled={savingPlaylist}>
-                {savingPlaylist ? "Saving Playlist..." : "Save Playlist"}
-              </button>
+              <Share link={`https://open.spotify.com/embed/playlist/${playlistLink}`}/>
             </div>
           ) : (
             <div>{console.log("caught undefined")}</div>
