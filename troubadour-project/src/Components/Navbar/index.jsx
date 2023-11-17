@@ -22,7 +22,6 @@ function Navbar () {
     const navigate = useNavigate();
     const location = useLocation();
     const [newUserId, setNewUserId] = useState();
-    const [storedUser, setStoredUser] = useState();
     
 
     useEffect(() => {
@@ -101,7 +100,6 @@ function Navbar () {
                 setLoggedin(true)
                 close();
                 localStorage.setItem("userId", userID[0].id);
-                setNewUserId(localStorage.getItem("userId"))
                 navigate(`/mood/${userID[0].id}`)
             } else {
                 setInputUsername("");
@@ -128,10 +126,10 @@ function Navbar () {
         setPopupOpen(false);
     };
     const editUser = () =>{
-        setStoredUser(localStorage.getItem("userId"));
+        const storedUserId = localStorage.getItem("userId");
         if (!id) {
-            setNewUserId(storedUser);
-            navigate(`/edit/${storedUser}`);
+            setNewUserId(storedUserId);
+            navigate(`/edit/${storedUserId}`);
         } else {
             setNewUserId(null);
             navigate(`/edit/${id}`);
@@ -145,7 +143,7 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-mood" to={`/mood/${storedUser}`}>Create Playlist</Link>
+                <Link id="link-mood" to={`/mood/${id}`}>Create Playlist</Link>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
             modal
