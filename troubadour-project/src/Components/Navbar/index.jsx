@@ -100,8 +100,8 @@ function Navbar () {
                 setLoggedin(true)
                 close();
                 localStorage.setItem("userId", userID[0].id);
-                const storedUserId = localStorage.getItem("userId");
-                navigate(`/mood/${storedUserId}`)
+                setNewUserId(localStorage.getItem("userId"))
+                navigate(`/mood/${userID[0].id}`)
             } else {
                 setInputUsername("");
                 setPassword("")
@@ -144,7 +144,7 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                <Link id="link-mood" to={`/mood/${id}`}>Create Playlist</Link>
+                <Link id="link-mood" to={`/mood/${newUserId}`}>Create Playlist</Link>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
             modal
