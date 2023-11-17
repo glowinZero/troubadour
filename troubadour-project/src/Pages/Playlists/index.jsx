@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Collapsible from "react-collapsible";
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
+  const redirect_URI = "https://fabulous-gnome-6f4332.netlify.app/playlists/:userId/:mood";
   const AUTH_END = "https://accounts.spotify.com/authorize";
   const response_type = "token";
+  const [playlists, setPlaylists] = useState([]);
+  const [playlistLink, setPlaylistLink] = useState("");
+  const scope =
+    "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state";
   const JSONLink = "https://troubadour-backend.onrender.com/playlists";
   const navigate = useNavigate();
   const { userId, mood } = useParams();
   const [token, setToken] = useState("");
-  const [playlists, setPlaylists] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
+  const [savingPlaylist, setSavingPlaylist] = useState(false); // Added state to track saving status
 
-  const searchArtist = async (searchMood, userId) => {
+  const searchArtist = async (searchMood, userId, playlistLink) => {
     try {
       const response = await axios.get("https://api.spotify.com/v1/search", {
         headers: {
@@ -24,6 +29,7 @@ function Playlists() {
           type: "playlist",
         },
       });
+
       const data = response.data;
 
       if (data.playlists && data.playlists.items.length > 0) {
@@ -32,7 +38,22 @@ function Playlists() {
 
         if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
           const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
-          savePlaylist(playlistId, searchMood, userId);
+          setPlaylistLink(playlistId);
+
+          if (playlistLink) {
+            const requestBody = {
+              url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+              mood: searchMood,
+              userId: userId,
+            };
+
+            try {
+              await axios.post(`${JSONLink}`, requestBody);
+              console.log("Playlist saved successfully");
+            } catch (error) {
+              console.error("Error saving playlist:", error);
+            }
+          }
         }
       } else {
         console.log("No playlists found");
@@ -42,29 +63,9 @@ function Playlists() {
     }
   };
 
-  const savePlaylist = async (playlistId, searchMood, userId) => {
-    const requestBody = {
-      url: `https://open.spotify.com/embed/playlist/${playlistId}`,
-      mood: searchMood,
-      userId: userId,
-    };
-
-    try {
-      await axios.post(`${JSONLink}`, requestBody);
-      console.log("Playlist saved successfully");
-    } catch (error) {
-      console.error("Error saving playlist:", error);
-    }
-  };
-
-  const deletePlaylist = async (playlistId) => {
-    // Add your logic to delete the playlist
-    try {
-      await axios.delete(`${JSONLink}/${playlistId}`);
-      console.log("Playlist deleted successfully");
-    } catch (error) {
-      console.error("Error deleting playlist:", error);
-    }
+  const handleSavePlaylist = () => {
+    setSavingPlaylist(true); // Set saving status to true when the button is clicked
+    setSearchKey(mood); // Update searchKey to trigger useEffect
   };
 
   useEffect(() => {
@@ -75,7 +76,7 @@ function Playlists() {
             Authorization: `Bearer ${token}`,
           },
           params: {
-            q: mood,
+            q: searchKey || mood,
             type: "playlist",
           },
         });
@@ -89,7 +90,22 @@ function Playlists() {
 
           if (firstPlaylist.external_urls && firstPlaylist.external_urls.spotify) {
             const playlistId = firstPlaylist.external_urls.spotify.split("/playlist/")[1];
-            savePlaylist(playlistId, mood, userId);
+            setPlaylistLink(playlistId);
+
+            if (playlistId) {
+              const requestBody = {
+                url: `https://open.spotify.com/embed/playlist/${playlistId}`,
+                mood: searchKey || mood,
+                userId: userId,
+              };
+
+              try {
+                await axios.post(`${JSONLink}`, requestBody);
+                console.log("Playlist saved successfully");
+              } catch (error) {
+                console.error("Error saving playlist:", error);
+              }
+            }
           }
         } else {
           console.log("No playlists found");
@@ -100,11 +116,12 @@ function Playlists() {
     };
 
     fetchData();
-  }, [userId, mood, token]);
+  }, [userId, searchKey, mood, token]); // Include all relevant dependencies
 
   useEffect(() => {
     const hash = window.location.hash;
     let storedToken = window.localStorage.getItem("token");
+
     if (userId !== ":userId") localStorage.setItem("userId", userId);
     if (mood !== ":mood") localStorage.setItem("mood", mood);
     const newUser = localStorage.getItem("userId");
@@ -126,9 +143,10 @@ function Playlists() {
     }
 
     setToken(storedToken);
+    setSearchKey(newMood);
 
     if (newMood && JSONLink && userId) {
-      searchArtist(newMood, userId);
+      searchArtist(newMood, userId, playlistLink);
     } else {
       console.log("none");
     }
@@ -136,7 +154,7 @@ function Playlists() {
     return () => {
       document.body.removeChild(script);
     };
-  }, [userId, mood, token]);
+  }, [mood, userId, playlistLink]);
 
   return (
     <div id="playlist-page">
@@ -144,48 +162,34 @@ function Playlists() {
         <div>
           <h1>Please log into your Spotify to proceed</h1>
           <a
-            href={`${AUTH_END}?client_id=${client_id}&response_type=${response_type}&show_dialog=true`}
+            href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}
           >
             Take me to Spotify
           </a>
         </div>
       ) : (
         <div>
-          {playlists.length > 0 ? (
+          {console.log("token defined:", token)}
+          {playlists.playlists ? (
             <div>
               <h1>Your Playlists</h1>
-              {playlists.map((playlist) => (
-                <Collapsible
-                  key={playlist.id}
-                  trigger={playlist.mood}
-                  classParentString="closed-accordion"
-                  closedclassActive="open-accordion"
-                >
-                  <div style={{ color: "white" }}>
-                    <div id="embed-iframe">
-                      <iframe
-                        title="Spotify Playlist"
-                        style={{ borderRadius: "12px", marginRight: "10px" }}
-                        src={playlist.url}
-                        width="80%"
-                        height="200px"
-                        frameBorder="0"
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                        loading="lazy"
-                      ></iframe>
-                    </div>
-                  </div>
-                  <div id="buttons-history">
-                    <button
-                      style={{ marginTop: "0px", marginBottom: "0" }}
-                      onClick={() => deletePlaylist(playlist.id)}
-                    >
-                      Delete
-                    </button>
-                    <Share />
-                  </div>
-                </Collapsible>
-              ))}
+              {console.log(playlistLink, "playlistlink form")}
+              <div id="embed-iframe">
+                <iframe
+                  title="Spotify Playlist"
+                  style={{ borderRadius: "12px", marginRight: "200px" }}
+                  src={`https://open.spotify.com/embed/playlist/${playlistLink}`}
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <button onClick={handleSavePlaylist} disabled={savingPlaylist}>
+                {savingPlaylist ? "Saving Playlist..." : "Save Playlist"}
+              </button>
             </div>
           ) : (
             <div>{console.log("caught undefined")}</div>
