@@ -1,5 +1,16 @@
+@font-face {
+  font-family: "Futura";
+  src: local('Futura'), url('../public/futura/FuturaPTMedium.woff') format('woff');
+}
+
+@font-face {
+  font-family: "Futura-light";
+  src: local('Futura'), url('../public/futura/FuturaPTLight.woff') format('woff');
+}
+
+
 #root {
-  font-family:Monaco;
+  font-family: "Futura";
   width: 100%;
   margin: 0 auto;
   padding: 0;
@@ -7,13 +18,13 @@
 }
 
 body{
-  font-family:Monaco;
+  font-family: "Futura";
   width: 100vh;
   height: 100vh;
 }
 
 #app{
-  font-family:Monaco;
+  font-family: "Futura";
   position: relative;
   height: 100vh;
   background-color: rgb(24, 24, 24);
@@ -32,7 +43,7 @@ body{
 }
 
 .overlay-content {
-  font-family:Monaco;
+  font-family: "Futura";
   position: fixed;
   top: 0;
   left: 0;
@@ -51,6 +62,8 @@ body{
 }
 
 #home-page-info{
+  font-family: "Futura-light";
+  letter-spacing: 2px;
   width: 40vw;
   text-align: left;
   margin-top: 30vh;
@@ -59,7 +72,8 @@ body{
 }
 
 #home-page-info h2{
-  font-size: 40px;
+  font-family: "Futura";
+  font-size: 37px;
 }
 
 #home-page-info button{
@@ -91,7 +105,7 @@ body{
 }
 
 #navbar{
-  font-family:Monaco;
+  font-family: "Futura";
   width: 100vw;
   color: white;
   height: 10vh;
@@ -105,14 +119,14 @@ body{
 }
 
 #logo-bar{
-  font-family:Monaco;
+  font-family: "Futura";
   width: 4vw;
   padding-top: 10px;
   padding-left: 20px;
 }
 
 #signup{
-  font-family:Monaco;
+  font-family: "Futura";
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -121,12 +135,12 @@ body{
 }
 
 #buttons-enter{
-  font-family:Monaco;
+  font-family: "Futura";
   margin-right: 2;
 }
 
 #home-signup{
-  font-family:Monaco;
+  font-family: "Futura";
   cursor: pointer;
   appearance: none;
   border: none;
@@ -140,7 +154,7 @@ body{
 }
 
 #home-toggle{
-  font-family:Monaco;
+  font-family: "Futura";
   font-weight: bold;
   cursor: pointer;
   appearance: none;
@@ -171,18 +185,18 @@ body{
   padding: 20px;
   margin-right: 20px;
   border-radius: 20px;
-  font-family:Monaco;
+  font-family: "Futura";
 }
 
 #form h4{
-  font-family:Monaco;
+  font-family: "Futura";
   margin-bottom: 0px;
   margin-top: 0px;
 }
 
 
 #popup{
-  font-family:Monaco;
+  font-family: "Futura";
   all: unset;
   display: flex;
   justify-content: center;
@@ -213,14 +227,14 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family:Monaco;
+  font-family: "Futura";
 }
 
 #home-page{
   width: 100%;
   height: 100%;
   color: white;
-  font-family:Monaco;
+  font-family: "Futura";
 }
 
 #background{
@@ -228,7 +242,7 @@ body{
 }
 
 #home-page h1{
-  font-family:Monaco;
+  font-family: "Futura";
   margin-top: 40vh;
   font-size: 5rem;
   height: 100%;
@@ -236,7 +250,7 @@ body{
 }
 
 #mood-page{
-  font-family:Monaco;
+  font-family: "Futura";
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -274,7 +288,7 @@ body{
 }
 
 select {
-  font-family: Monaco;
+  font-family: "Futura";
   -webkit-appearance: none;
   -moz-appearance: none;
   background-color: transparent;
@@ -331,14 +345,14 @@ select::after {
 }
 
 #mood-page button{
-  font-family:Monaco;
+  font-family: "Futura";
   font-size: 15px;
   height: 15%;
   width: 40%;
 }
 
 #feeling-state{
-  font-family:Monaco;
+  font-family: "Futura";
   color: white;
   margin-bottom: 5%;
   width: 100%;
@@ -346,19 +360,19 @@ select::after {
 }
 
 #feeling-dropdown{
-  font-family:Monaco;
+  font-family: "Futura";
   height: 60%;
   width: 20%;
   font-size: 22px;
 }
 
 #feeling-dropdown option{
-  font-family:Monaco;
+  font-family: "Futura";
   appearance: none;
 }
 
 #mood-page-info{
-  font-family:Monaco;
+  font-family: "Futura";
   width: 30vw;
   height: 40vh;
   position: absolute;
@@ -372,7 +386,7 @@ select::after {
 }
 
 #edit-user{
-  font-family:Monaco;
+  font-family: "Futura";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -384,7 +398,7 @@ select::after {
 }
 
 #form-edit-user{
-  font-family:Monaco;
+  font-family: "Futura";
   display: flex;
   justify-content:center;
   align-items: center;
@@ -401,7 +415,7 @@ select::after {
 }
 
 #form-edit-user label{
-  font-family:Monaco;
+  font-family: "Futura";
   display: flex;
   justify-content:center;
   align-items: center;
@@ -410,7 +424,7 @@ select::after {
 }
 
 #form-edit-user input{
-  font-family:Monaco;
+  font-family: "Futura";
   margin-top: 1%;
   margin-bottom: 3%;
   width: 100%;
@@ -423,7 +437,7 @@ select::after {
 
 
 #buttons-edit-user{
-  font-family:Monaco;  
+  font-family: "Futura";  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -434,7 +448,7 @@ select::after {
 }
 
 #menu{
-  font-family:Monaco;  
+  font-family: "Futura";  
   color: white;
   text-decoration: none;
   width: 30%;
@@ -442,7 +456,7 @@ select::after {
 }
 
 #link-history{
-  font-family:Monaco;  
+  font-family: "Futura";  
   color: white;
   text-decoration: none;
   margin-right: 5%;
@@ -453,7 +467,7 @@ select::after {
 }
 
 #link-mood{
-  font-family:Monaco;  
+  font-family: "Futura";  
   color: white;
   text-decoration: none;
   padding-bottom: 2%;
@@ -463,13 +477,13 @@ select::after {
 }
 
 #history {
-  font-family:Monaco;
+  font-family: "Futura";
   color: white;
   cursor: pointer;
 }
 
 #historylist{
-  font-family:Monaco;
+  font-family: "Futura";
   color: white;
   margin-top: 5vh;
   max-height: 500px;
@@ -477,12 +491,12 @@ select::after {
 }
 
 #social-share{
-  font-family:Monaco;  
+  font-family: "Futura";  
   cursor: pointer;
 }
 
 #accordeon{
-  font-family:Monaco;  
+  font-family: "Futura";  
   background-color: grey;
   position: relative;
 }
@@ -494,7 +508,7 @@ select::after {
 
 
 #playlist-page{
-  font-family:Monaco;  
+  font-family: "Futura";  
   z-index: 5;
   height: 100vh;
   width: 100vw;
@@ -510,7 +524,7 @@ select::after {
 }
 
 #mood-button{
-  font-family:Monaco;  
+  font-family: "Futura";  
   cursor: pointer;
   appearance: none;
   border: none;
@@ -524,7 +538,7 @@ select::after {
 }
 
 #save-user{
-  font-family:Monaco;  
+  font-family: "Futura";  
   cursor: pointer;
   appearance: none;
   border: none;
@@ -538,7 +552,7 @@ select::after {
 }
 
 #delete-user{
-  font-family:Monaco;  
+  font-family: "Futura";  
   cursor: pointer;
   appearance: none;
   border: none;
