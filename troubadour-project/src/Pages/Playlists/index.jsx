@@ -138,7 +138,7 @@ function Playlists() {
           {console.log("token defined:", token)}
           {playlists.playlists ? (
             <div>
-              <h1>Your Playlists</h1>
+              <h1 id="playlist-title">Your Playlist of today</h1>
               {console.log(playlistLink, "playlistlink form")}
               <div id="embed-iframe">
                 <iframe
@@ -157,7 +157,7 @@ function Playlists() {
                   <WhatsappShareButton url={`https://open.spotify.com/embed/playlist/${playlistLink}`}
                     title={"I'm sharing with you my playlist of the day!"}
                     separator={" "}>
-                    <WhatsappIcon size={40}/>
+                    <p id="share-button">Share in Whatsapp</p>
                   </WhatsappShareButton>
                  </div>
               </div>

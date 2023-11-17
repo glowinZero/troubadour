@@ -606,3 +606,12 @@ select::after {
   justify-content: space-evenly;
   align-items: center;
 }
+
+#playlist-title{
+  color: white;
+}
+
+#share-button{
+  color: white;
+  font-family: "Futura"; 
+}
