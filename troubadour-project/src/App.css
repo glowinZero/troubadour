@@ -613,8 +613,9 @@ select::after {
 
 #share-button{
   color: white;
-  font-family: "Futura"; 
+  font-family: "Futura-light"; 
   background-color: #1DB954;
   border-radius: 20px;
   margin-bottom: 20px;
+  padding: 20px;
 }
