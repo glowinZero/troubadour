@@ -5,7 +5,6 @@ import HomePage from './Pages/HomePage'
 import Playlists from './Pages/Playlists'
 import Mood from './Pages/Mood'
 import EditUser from './Pages/EditUser'
-import Share from './Components/SocialShare'
 
 function App() {
 
@@ -18,7 +17,6 @@ function App() {
           <Route path="/mood/:userId" element={<Mood/>}/>
           <Route path="/playlists/:userId/:mood" element={<Playlists/>}/>
           <Route path="/edit/:userId" element={<EditUser/>}/>
-          <Route path="/socialShare" element={<Share/>}/>
         </Routes>
       </div>
     </div>
