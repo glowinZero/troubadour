@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Share from "../../Components/SocialShare";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
+
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
@@ -10,8 +11,7 @@ function Playlists() {
   const response_type = "token";
   const [playlists, setPlaylists] = useState([]);
   const [playlistLink, setPlaylistLink] = useState("");
-  const scope =
-    "user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state";
+  const scope ="user-library-read%20playlist-read-private%20user-read-private%20streaming%20user-read-playback-state%20user-modify-playback-state";
   const JSONLink = "https://troubadour-backend.onrender.com/playlists";
   const navigate = useNavigate();
   const { userId, mood } = useParams();
@@ -153,13 +153,19 @@ function Playlists() {
                   loading="lazy"
                 ></iframe>
               </div>
-              <Share link={`https://open.spotify.com/embed/playlist/${playlistLink}`}/>
             </div>
           ) : (
             <div>{console.log("caught undefined")}</div>
           )}
         </div>
       )}
+      <div id="social-share">
+            <WhatsappShareButton url={`https://open.spotify.com/embed/playlist/${playlistLink}`}
+            title={"I'm sharing with you my playlist of the day!"}
+            separator={" "}>
+                <WhatsappIcon size={40}/>
+            </WhatsappShareButton>
+        </div>
     </div>
   );
 }
