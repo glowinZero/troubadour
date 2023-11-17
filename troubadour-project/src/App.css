@@ -494,6 +494,7 @@ select::after {
 #social-share{
   font-family: "Futura";  
   cursor: pointer;
+  width: 100%;
 }
 
 #accordeon{
