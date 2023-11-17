@@ -480,6 +480,7 @@ select::after {
   font-family: "Futura";
   color: white;
   cursor: pointer;
+  margin-top: 5%;
 }
 
 #historylist{
@@ -496,19 +497,36 @@ select::after {
 }
 
 #accordeon{
-  font-family: "Futura";  
-  background-color: grey;
+  font-family: "Futura-light";  
+  background-color: #303030;
   position: relative;
+  width: 100vw;
+  border: 1px solid white;
+  overflow:scroll;
 }
 
 #accordeonContent{
   padding:0%;
+  background-color: #303030;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
+.closed-accordion {
+  font-family: "Futura-light";
+  letter-spacing: 1px;
+  background-color: #303030;
+  border-radius: 20px;
+  color: white;
+  padding: 20px;
+}
 
+.open-accordion {
+  background-color: #303030;
+}
 
 #playlist-page{
-  font-family: "Futura";  
+  font-family: "Futura-light";  
   z-index: 5;
   height: 100vh;
   width: 100vw;
@@ -517,6 +535,10 @@ select::after {
   align-items: center;
   flex-direction: column;
   position: absolute;
+}
+
+#embed-iframe{
+  background-color: #303030;
 }
 
 #playlist-page h1{
@@ -563,4 +585,19 @@ select::after {
   background-color: white;
   color: black;
   border-radius: 20px;
+}
+
+#historylist{
+  height: 70vh;
+  width: 60vw;
+  scrollbar-width: thin;
+  overflow-y: hidden;
+}
+
+
+#buttons-history{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }

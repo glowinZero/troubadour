@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Collapsible from 'react-collapsible';
 import Share from '../SocialShare';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 const JSONLink = "https://troubadour-backend.onrender.com/playlists"
 
 
@@ -39,36 +38,25 @@ function PlaylistHistory() {
     .catch((error) => console.error(error));
 };
 
-//apply filter by user id to display specific user history.
-  return (
-    <div id="history" key="playlistkey">
-      <h1>Your saved playlists</h1>
-      <div id="historylist">
+return (
+  <div id="history" key="playlistkey">
+    <h1>Your saved playlists</h1>
+    <div id="historylist">
       {playlists.map((playlist) => (
-        <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood}>
+        <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood} classParentString="closed-accordion" closedclassActive="open-accordion">
           <div id="accordeonContent"style={{color: "white"}}>
-          <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
-          <Share/>
-{/*             This is the content for the playlist with URL: {playlist.url}
- */}             <div id="embed-iframe">
-                    <iframe
-                    title="Spotify Playlist"
-                    style={{ borderRadius: '12px', marginRight: '10px'}}
-                    src={playlist.url}
-                    width="80%"
-                    height="200px"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-                    loading="lazy"
-                    ></iframe>
-                </div> 
+            <div id="embed-iframe">
+              <iframe title="Spotify Playlist" style={{ borderRadius: '12px', marginRight: '10px'}} src={playlist.url} width="80%" height="200px" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" loading="lazy"></iframe>
+            </div> 
           </div>
-
+          <div id="buttons-history">
+          <Share/>
+            <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
+          </div>
         </Collapsible>
       ))}
-      </div>
     </div>
-  );
-}
+  </div>
+)}
 
 export default PlaylistHistory;
