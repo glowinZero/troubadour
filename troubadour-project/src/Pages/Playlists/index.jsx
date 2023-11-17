@@ -146,12 +146,19 @@ function Playlists() {
                   style={{ borderRadius: "12px", marginRight: "200px" }}
                   src={`https://open.spotify.com/embed/playlist/${playlistLink}`}
                   width="100%"
-                  height="600"
+                  height="400"
                   frameBorder="0"
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                   allowFullScreen
                   loading="lazy"
                 ></iframe>
+                <div id="social-share">
+                  <WhatsappShareButton url={`https://open.spotify.com/embed/playlist/${playlistLink}`}
+                    title={"I'm sharing with you my playlist of the day!"}
+                    separator={" "}>
+                    <WhatsappIcon size={40}/>
+                  </WhatsappShareButton>
+                 </div>
               </div>
             </div>
           ) : (
@@ -159,13 +166,7 @@ function Playlists() {
           )}
         </div>
       )}
-      <div id="social-share">
-            <WhatsappShareButton url={`https://open.spotify.com/embed/playlist/${playlistLink}`}
-            title={"I'm sharing with you my playlist of the day!"}
-            separator={" "}>
-                <WhatsappIcon size={40}/>
-            </WhatsappShareButton>
-        </div>
+      
     </div>
   );
 }
