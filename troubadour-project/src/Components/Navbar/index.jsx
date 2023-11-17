@@ -100,7 +100,8 @@ function Navbar () {
                 setLoggedin(true)
                 close();
                 localStorage.setItem("userId", userID[0].id);
-                navigate(`/mood/${userID[0].id}`)
+                const storedUserId = localStorage.getItem("userId");
+                navigate(`/mood/${storedUserId}`)
             } else {
                 setInputUsername("");
                 setPassword("")
