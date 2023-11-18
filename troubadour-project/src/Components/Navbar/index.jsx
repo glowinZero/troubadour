@@ -68,7 +68,6 @@ function Navbar () {
                 setLoggedin(false, () => {
                     setUsername("");
                     setPassword("");
-                    setId(null);
                     navigate("/");
                     window.location.reload();
                     localStorage.removeItem("username");
@@ -143,6 +142,7 @@ function Navbar () {
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
+                {console.log("ver id", id)}
                 <Link id="link-mood" to={`/mood/${id}`}>Create Playlist</Link>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
