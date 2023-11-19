@@ -18,7 +18,6 @@ function EditUser (){
         }).catch(error=>{console.log(error) })
     }, [])
 
-
     const handleUpdate = (e)=>{
         e.preventDefault();
         const updateInfo = {
@@ -27,6 +26,7 @@ function EditUser (){
             username: !username ? loggedUser.username : username,
             password: !password ? loggedUser.password : password,
         };
+
         axios.put(`${userApi}/users/${user.userId}`, updateInfo).then((response) => {
             setloggedUser(response.data);
             setName("");
@@ -34,25 +34,21 @@ function EditUser (){
             setUsername("");
             setPassword("");
             alert("User information updated");
-          })
-          .catch((error) => {
+        }).catch((error) => {
             console.log(error);
-          });
+        });
     } 
 
     const deleteUser = () => {
-        axios.delete(`${userApi}/users/${user.userId}`)
-          .then(() => {
+        axios.delete(`${userApi}/users/${user.userId}`).then(() => {
             localStorage.removeItem("username")
             navigate("/")
             window.location.reload()
-          })
-          .catch((error) => {
+        }).catch((error) => {
             console.log(error);
-          });
-      };
+        });
+    };
       
-    
     return(
         <div id="edit-user">
             <form id="form-edit-user" onSubmit={handleUpdate}>

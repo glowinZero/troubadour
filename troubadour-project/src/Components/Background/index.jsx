@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const BlobAnimation = () => {
+function BlobAnimation () {
   const [colors, setColors] = useState({
     stop1: 'rgb(245, 36, 36)',
     stop2: 'rgb(0, 235, 27)',
@@ -52,6 +52,6 @@ const BlobAnimation = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BlobAnimation;

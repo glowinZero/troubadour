@@ -18,15 +18,17 @@ function Mood () {
     return(
         <div id="mood-page">
             <div id="mood-page-info">
-                <p id="feeling-state">I am feeling <select id="feeling-dropdown" name="How are you feeling today?" defaultValue={0} onChange={moodChoice}>
-                    <option value={"neutral"}>Neutral</option>
-                    <option value={"happy"}>Happy</option>
-                    <option value={"sad"}>Sad</option>
-                    <option value={"romantic"}>Romantic</option>
-                    <option value={"calm"}>calm</option>
-                    <option value={"angry"}>Angry</option>
-                    <option value={"hopeful"}>Hopeful</option>
-                </select> today</p>
+                <p id="feeling-state">I am feeling 
+                    <select id="feeling-dropdown" name="How are you feeling today?" defaultValue={0} onChange={moodChoice}>
+                        <option value={"neutral"}>Neutral</option>
+                        <option value={"happy"}>Happy</option>
+                        <option value={"sad"}>Sad</option>
+                        <option value={"romantic"}>Romantic</option>
+                        <option value={"calm"}>calm</option>
+                        <option value={"angry"}>Angry</option>
+                        <option value={"hopeful"}>Hopeful</option>
+                    </select> 
+                today</p>
                 <button id="mood-button" onClick={()=>handleSubmit()}>submit</button>
             </div>
             <BlobAnimation />

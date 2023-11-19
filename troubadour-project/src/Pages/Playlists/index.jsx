@@ -44,7 +44,8 @@ function Playlists() {
       } else {
         console.log("No playlists found");
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error during artist search:", error);
     }
   };
@@ -76,13 +77,14 @@ function Playlists() {
         } else {
           console.log("No playlists found");
         }
-      } catch (error) {
+      } 
+      catch (error) {
         console.error("Error during artist search:", error);
       }
     };
 
     fetchData();
-  }, [userId, searchKey, mood, token]); // Include all relevant dependencies
+  }, [userId, searchKey, mood, token]); 
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -124,50 +126,29 @@ function Playlists() {
 
   return (
     <div id="playlist-page">
-      {!token ? (
-        <div>
-          <h1>Please log into your Spotify to proceed</h1>
-          <a
-            href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}
-          >
-            Take me to Spotify
-          </a>
-        </div>
-      ) : (
-        <div>
-          {console.log("token defined:", token)}
-          {playlists.playlists ? (
-            <div>
-              <h1 id="playlist-title">Your Playlist of today</h1>
-              {console.log(playlistLink, "playlistlink form")}
-              <div id="embed-iframe">
-                <iframe
-                  id="frame"
-                  title="Spotify Playlist"
-                  style={{ borderRadius: "12px", marginRight: "200px" }}
-                  src={`https://open.spotify.com/embed/playlist/${playlistLink}`}
-                  width="100%"
-                  height="360"
-                  frameBorder="0"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-                <div id="social-share">
-                  <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`}
-                    title={"I'm sharing with you my playlist of the day!"}
-                    separator={" "}>
-                    <p id="share-button">Share in Whatsapp</p>
-                  </WhatsappShareButton>
-                 </div>
+      {!token ? 
+      (<div>
+        <h1>Please log into your Spotify to proceed</h1>
+        <a href={`${AUTH_END}?client_id=${client_id}&redirect_uri=${redirect_URI}&scope=${scope}&response_type=${response_type}&show_dialog=true`}>
+          Take me to Spotify
+        </a>
+      </div>) : 
+      (<div>
+        {console.log("token defined:", token)}
+        {playlists.playlists ? 
+        (<div>
+            <h1 id="playlist-title">Your Playlist of today</h1>
+            {console.log(playlistLink, "playlistlink form")}
+            <div id="embed-iframe">
+              <iframe id="frame" title="Spotify Playlist" style={{ borderRadius: "12px", marginRight: "200px" }} src={`https://open.spotify.com/embed/playlist/${playlistLink}`} width="100%" height="360" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowFullScreen loading="lazy"></iframe>
+              <div id="social-share">
+                <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`} title={"I'm sharing with you my playlist of the day!"} separator={" "}><p id="share-button">Share in Whatsapp</p></WhatsappShareButton>
               </div>
             </div>
-          ) : (
-            <div>{console.log("caught undefined")}</div>
-          )}
+          </div>) : 
+        (<div>{console.log("caught undefined")}</div>)}
         </div>
-      )}
-      
+      )} 
     </div>
   );
 }

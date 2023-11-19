@@ -8,7 +8,6 @@
   src: local('Futura'), url('../public/futura/FuturaPTLight.woff') format('woff');
 }
 
-
 #root {
   font-family: "Futura";
   width: 100%;
@@ -173,7 +172,6 @@ body{
   cursor: pointer;
 }
 
-
 #form{
   display: flex;
   justify-content: space-between;
@@ -193,7 +191,6 @@ body{
   margin-bottom: 0px;
   margin-top: 0px;
 }
-
 
 #popup{
   font-family: "Futura";
@@ -215,7 +212,6 @@ body{
   color: black;
   border-radius: 30px;
 }
-
 
 .overlay {
   position: fixed;
@@ -435,7 +431,6 @@ select::after {
   background-color: rgba(128, 128, 128, 0.123);
 }
 
-
 #buttons-edit-user{
   font-family: "Futura";  
   display: flex;
@@ -544,8 +539,6 @@ select::after {
   height: 60vh;
 }
 
-#frame
-
 #playlist-page h1{
   color: white;
 }
@@ -598,7 +591,6 @@ select::after {
   scrollbar-width: thin;
   overflow-y: hidden;
 }
-
 
 #buttons-history{
   display: flex;
