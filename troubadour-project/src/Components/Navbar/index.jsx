@@ -1,4 +1,4 @@
-import { useNavigate, Link, useLocation } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import '../../App.css'
 import axios from "axios"
@@ -10,7 +10,7 @@ const userApi = "https://troubadour-backend.onrender.com"
 // eslint-disable-next-line react/prop-types
 function Navbar () {
     const [users, setUsers] = useState([]);
-    const [id, setId] = useState();
+    const [id, setId] = useState(null);
     const [inputUsername, setInputUsername] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -53,6 +53,7 @@ function Navbar () {
                 navigate("/");
             }
         }
+        
     }, [loggedin, location.pathname, navigate, users]);
     
     const updateUsernameFromStorage = () => {
@@ -93,7 +94,6 @@ function Navbar () {
         }).catch(error=>{console.log(error)}) : axios.get(`${userApi}/users`).then((response)=>{
             setUsers(response.data)
             const userID = users.filter((user)=>{return (user.username === inputUsername)})
-            console.log("user to login", userID[0])
             setId(userID[0].id);
             if (users.some(user => user.username === inputUsername && user.password === password )) {
                 setLoggedin(true)
@@ -124,6 +124,7 @@ function Navbar () {
       const closePopup = () => {
         setPopupOpen(false);
     };
+
     const editUser = () =>{
         const storedUserId = localStorage.getItem("userId");
         if (!id) {
@@ -134,16 +135,31 @@ function Navbar () {
             navigate(`/edit/${id}`);
         }
 
-    setPopupOpen(false);
-    closePopup();
-  };
+        setPopupOpen(false);
+        closePopup();
+    };
+
+    const createPlaylist = () =>{
+        const storedUserId = localStorage.getItem("userId");
+        if (!id) {
+            setNewUserId(storedUserId);
+            navigate(`/mood/${storedUserId}`);
+        } else {
+            setNewUserId(null);
+            navigate(`/mood/${id}`);
+        }
+
+        setPopupOpen(false);
+        closePopup();
+    };
+
+  
 
     return (
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
-                {console.log("ver id", id)}
-                <Link id="link-mood" to={`/mood/${id}`}>Create Playlist</Link>
+                <button id="link-mood" onClick={()=>{createPlaylist()}}>Create Playlist</button>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username && !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
             modal
