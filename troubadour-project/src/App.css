@@ -464,10 +464,12 @@ select::after {
 #link-mood{
   font-family: "Futura";  
   color: white;
+  background-color: transparent;
   text-decoration: none;
   padding-bottom: 2%;
   padding-left: 1%;
   padding-right: 1%;
+  border-radius: 0;
   border-bottom: 1px solid white;
 }
 
