@@ -164,9 +164,9 @@ function Playlists() {
                 <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`} title={"I'm sharing with you my playlist of the day!"} separator={" "}><p id="share-button">Share in Whatsapp</p></WhatsappShareButton>
               </div>
               <div>
-              <button onClick={savePlaylist()}>
-                Save Playlist
-              </button>
+              <button onClick={() => savePlaylist(playlistLink)}>
+              Save Playlist
+                  </button>
                 </div>
             </div>
           </div>) : 
