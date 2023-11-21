@@ -50,7 +50,7 @@ function Playlists() {
     }
   };
 
-  async function savePlaylist(playlistLink) {
+  async function savePlaylist(playlistLink, searchMood, userId, JSONLink) {
     if (playlistLink) {
       const requestBody = {
         url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
@@ -164,7 +164,7 @@ function Playlists() {
                 <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`} title={"I'm sharing with you my playlist of the day!"} separator={" "}><p id="share-button">Share in Whatsapp</p></WhatsappShareButton>
               </div>
               <div>
-              <button onClick={() => savePlaylist(playlistLink)}>
+              <button onClick={() => savePlaylist(playlistLink, mood, userId, JSONLink)}>
               Save Playlist
                   </button>
                 </div>
