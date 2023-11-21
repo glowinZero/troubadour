@@ -50,6 +50,25 @@ function Playlists() {
     }
   };
 
+  async function savePlaylist(playlistLink) {
+    if (playlistLink) {
+      const requestBody = {
+        url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+        mood: searchMood,
+        userId: userId,
+      };
+  
+      try {
+        await axios.post(`${JSONLink}`, requestBody);
+        console.log("Playlist saved successfully");
+      } catch (error) {
+        console.error("Error saving playlist:", error);
+      }
+    } else {
+      console.log("No playlists found");
+    }
+  }  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -144,6 +163,11 @@ function Playlists() {
               <div id="social-share">
                 <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`} title={"I'm sharing with you my playlist of the day!"} separator={" "}><p id="share-button">Share in Whatsapp</p></WhatsappShareButton>
               </div>
+              <div>
+              <button onClick={savePlaylist()}>
+                Save Playlist
+              </button>
+                </div>
             </div>
           </div>) : 
         (<div>{console.log("caught undefined")}</div>)}
