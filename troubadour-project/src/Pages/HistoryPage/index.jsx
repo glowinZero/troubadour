@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Collapsible from 'react-collapsible';
-import Share from '../SocialShare';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 const JSONLink = "https://troubadour-backend.onrender.com/playlists"
@@ -11,6 +10,7 @@ function PlaylistHistory() {
   const [playlists, setPlaylists] = useState([]);
   useEffect (()=>{
     const userId = localStorage.getItem("userId");
+    console.log(userId)
     axios.get (JSONLink)
     .then((response)=>{
       setPlaylists((prevPlaylists) => {
@@ -23,9 +23,6 @@ function PlaylistHistory() {
     .catch(error=>
       {console.log(error)})
   }, [JSONLink])
-
-  console.log(playlists)
-
 
   const deletePlaylist = (playlistId) => {
     axios
@@ -48,7 +45,6 @@ function PlaylistHistory() {
         <Collapsible id="accordeon" key={playlist.id} trigger={playlist.mood}>
           <div id="accordeonContent"style={{color: "white"}}>
           <button style={{ marginTop: '0px', marginBottom: '0' }}onClick={() => deletePlaylist(playlist.id)}>Delete</button>
-          <Share/>
             <div id="embed-iframe">
                     <iframe
                     title="Spotify Playlist"
