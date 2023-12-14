@@ -171,11 +171,14 @@ function Navbar () {
         closePopup();
     };
 
+
+
     return (
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
                 <button id="link-mood" onClick={()=>{createPlaylist()}}>Create Playlist</button>
+                <button id="link-history" onClick={()=>navigate(`/history/${id}`)}>History</button>
             </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!username || !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
             modal
