@@ -18,7 +18,6 @@ function App() {
           <Route path="/mood/:userId" element={<Mood/>}/>
           <Route path="/playlists/:userId/:mood" element={<Playlists/>}/>
           <Route path="/edit/:userId" element={<EditUser/>}/>
-          <Route path="history/:userId" element={<PlaylistHistory/>}/>
         </Routes>
       </div>
     </div>
