@@ -1,4 +1,4 @@
-import guitarist from "../../../public/felipe-portella-h6gTtqBZUxc-unsplash.png"
+import guitarist from "../../assets/felipe-portella-h6gTtqBZUxc-unsplash.png"
 import BlobAnimation from "../../Components/Background";
 
 function HomePage() {

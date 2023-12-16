@@ -1,139 +1,137 @@
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Popup from 'reactjs-popup';
 import '../../App.css'
 import axios from "axios"
-import { useEffect, useState } from "react"
-import logo from "../../../public/noun-banjo-5393194 (1).png"
-const userApi = "https://troubadour-backend.onrender.com"
+import { useEffect, useState, useContext } from "react"
+import logo from "../../assets/noun-banjo-5393194 (1).png"
+import { AuthContext } from "../../Context/auth.context";
 
-function Navbar () {
-    const [users, setUsers] = useState([]);
-    const [id, setId] = useState(null);
-    const [inputUsername, setInputUsername] = useState("");
+const userApi = "http://localhost:5005"
+
+function Navbar() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
     const [formType, setFormType] = useState("login");
-    const [loggedin, setLoggedin] = useState(false)
     const [popupOpen, setPopupOpen] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
-    const [newUserId, setNewUserId] = useState();
-    
-
+    const { user, logOut } = useContext(AuthContext);
+    const [error, setError] = useState();
+    const { storeToken, authenticateUser } = useContext(AuthContext);
+    const [loggedUser, setLoggedUser] = useState();
+    const [loggedin, setLoggedIn] = useState(false);
+  
     useEffect(() => {
-        if (newUserId) {
-          localStorage.setItem("newUserId", newUserId);
+      const token = localStorage.getItem("authToken");
+  
+      if (!token || !user) {
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+        return; // Add a return statement here
+      }
+  
+      setLoggedUser(user);
+  
+      const fetchData = async () => {
+        const getToken = localStorage.getItem("authToken");
+  
+        if (getToken && user) {
+          try {
+            const idUser = user._id;
+  
+            const responseUser = await axios.get(
+              `${userApi}/auth/users/${idUser}`
+            );
+            setLoggedUser(responseUser.data);
+          } catch (error) {
+            console.error("Error fetching user details:", error);
+          }
         }
-    }, [newUserId]);
-
-    useEffect(() => {
-        if (!users.length) {
-            axios.get(`${userApi}/users`)
-                .then((response) => {
-                    setUsers(response.data);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-        const storedUsername = localStorage.getItem("username");
-        
-        if (!loggedin && storedUsername !== null) {
-            setUsername(storedUsername);
-            const userFound = users.some(user => user.username === storedUsername);
-            setLoggedin(userFound);
-        }
-        if (!loggedin) {
-            updateUsernameFromStorage();
-            if (location.pathname === "/" && performance.navigation.type !== 1) {
-                navigate("/");
-            }
-        }
-        
-    }, [loggedin, location.pathname, navigate, users]);
-    
-    const updateUsernameFromStorage = () => {
-        const storedUsername = window.localStorage.getItem("username");
-        if (storedUsername && !username) {
-            setUsername(storedUsername);
-        }
+      };
+  
+      fetchData();
+    }, [user, navigate]);
+  
+    const handleLoginSubmit = async (e) => {
+      e.preventDefault();
+  
+      const requestBody = { email, password };
+  
+      try {
+        const response = await axios.post(`${userApi}/auth/login`, requestBody);
+        const { authToken, userId } = response.data;
+  
+        storeToken(authToken);
+  
+        const userResponse = await axios.get(`${userApi}/auth/users/${userId}`);
+        const loggedInUser = userResponse.data;
+  
+        authenticateUser(loggedInUser);
+  
+        setLoggedIn(true);
+        navigate("/mood");
+      } catch (error) {
+        const errorDescription = error.response?.data?.message || "Login failed.";
+        setError(errorDescription);
+      }
     };
 
-    const handleSubmit = (e, close) =>{
+    const handleRegister = (e) => {
         e.preventDefault();
-
-        if (!inputUsername || !password) {
-            alert("User or password is incorrect or missing");
-
-            if (loggedin) {
-                setLoggedin(false)
-                setUsername("");
-                setPassword("");
-                setInputUsername("");
-                localStorage.removeItem("username");
-                navigate("/");
-                window.location.reload();
-                close();
-            }
-            return;
+        const requestBody = { email, password, username};
+    
+        if (
+          email === "" ||
+          password === "" ||
+          username === ""
+        ) {
+          alert("Provide all fields in order to create a new Student");
+          return;
         }
-
-        localStorage.setItem("username", inputUsername);
-        localStorage.setItem("userId", id);
-        const requestBody = {username: inputUsername, password: password, name: name, email: email};
-
-        (formType === "signup"
-        ? axios.post(`${userApi}/users`, requestBody)
-        .then(() => {
-            setLoggedin(true);
-            setInputUsername("");
-            setUsername("");
-            setPassword("");
-            setName("");
-            setEmail("");
-            localStorage.removeItem("username");
-            window.location.reload();
-            close();
-        }).catch(error => {
-            console.log(error);
-        })
-        : axios.get(`${userApi}/users`)
-        .then(response => {
-            setUsers(response.data);
-            const userID = users.filter(user => user.username === inputUsername);
-        
-            if (userID.length > 0 && users.some(user => user.username === inputUsername && user.password === password)) {
-                setLoggedin(true);
-                close();
-                localStorage.setItem("userId", userID[0].id);
-                navigate(`/mood/${userID[0].id}`);
-            } else {
-                localStorage.removeItem("userId");
-                localStorage.removeItem("username");
-                alert("User or password is incorrect or missing");
-                setInputUsername("");
-                setPassword("");
-            }
-        }).catch(error => {console.log(error)}));
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        if (!emailRegex.test(email)) {
+          alert("Provide a valid email");
+          return;
+        }
+    
+        const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+        if (!passwordRegex.test(password)) {
+          alert("Password must have at least 6 characters and contain 1 lowercase letter, 1 uppercase letter, 1 number");
+          return;
+        }
+    
+        axios
+          .post(`${userApi}/auth/signup`, requestBody)
+          .then(() => {
+            return axios.post(`${userApi}/auth/login`, requestBody);
+          })
+          .then((response) => {
+            storeToken(response.data.authToken);
+            localStorage.setItem("Logged In", response.data.authToken);
+            authenticateUser();
+            navigate("/dashboard");
+          })
+          .catch((error) => {
+            const errorDescription =
+              error.response.data.message ||
+              "Failed to create a Student. Please try again.";
+            setError(errorDescription);
+          });
     };
 
     const toggleForm = () =>{
         setFormType(formType === "login" ? "signup" : "login");
     };
 
-    const logOut = () => {
-        setLoggedin(false);
-        setId(null);
-        localStorage.removeItem("username");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("newUserId");
+    const logout = () => {
+        logOut();
+        setLoggedUser(null);
+        setLoggedIn(false);
+        localStorage.removeItem("Logged In");
         navigate("/");
-        setInputUsername("");
-        setPassword("");
-        window.location.reload();
-    };
+      };
 
     const openPopup = () => {
         setPopupOpen(true);
@@ -144,29 +142,14 @@ function Navbar () {
     };
 
     const editUser = () =>{
-        const storedUserId = localStorage.getItem("userId");
-        if (!id) {
-            setNewUserId(storedUserId);
-            navigate(`/edit/${storedUserId}`);
-        } else {
-            setNewUserId(null);
-            navigate(`/edit/${id}`);
-        }
-
+        const storedUserId = loggedUser._id;
+        navigate(`/edit/${storedUserId}`);
         setPopupOpen(false);
         closePopup();
     };
 
     const createPlaylist = () =>{
-        const storedUserId = localStorage.getItem("userId");
-        if (!id) {
-            setNewUserId(storedUserId);
-            navigate(`/mood/${storedUserId}`);
-        } else {
-            setNewUserId(null);
-            navigate(`/mood/${id}`);
-        }
-
+        navigate(`/mood`);
         setPopupOpen(false);
         closePopup();
     };
@@ -183,14 +166,13 @@ function Navbar () {
             open={popupOpen}
             onClose={closePopup}>
                 {(close) => (
-                    <form className="overlay" onSubmit={(e)=>handleSubmit(e, close)}>
+                    <form className="overlay" onSubmit={formType === "login" ? (e)=>handleLoginSubmit(e, close) : (e)=>handleRegister(e, close)}>
                         {!loggedin || !username === "" ?(
                             <div id="form">
                                 <button id="close-popup" onClick={() => close()}>x</button>
                                 <h4>{formType === "login" ? "login" : "signup"}</h4>
-                                {formType === "signup" ? <input id="name" type="name" placeholder="name" value={name} onChange={(e) => setName(e.target.value)}/> : console.log("login form")}
-                                {formType === "signup" ? <input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/> : console.log("login form")}
-                                <label><input id="username" type="text" placeholder="username" value={inputUsername} onChange={(e) => setInputUsername(e.target.value)}/></label>
+                                <label><input id="email" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/></label>
+                                {formType === "signup" ? <input id="username" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}/> : ""}
                                 <label><input id="password" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label>
                                 <button id="home-signup" type="submit">{formType === "login" ? "login" : "signup"}</button>
                                 <button id="home-toggle" type="button" onClick={toggleForm} > {formType === "signup" ? "Already have an account!" : "Don't have an account!"}</button>
@@ -198,8 +180,8 @@ function Navbar () {
                             <div id="form">
                                 <button id="close-popup" onClick={() => close()}>x</button>
                                 {!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}
-                                <p>Hi {username} !</p>
-                                <button id="home-signup" type="button" onClick={()=>{logOut()}}>Logout</button>
+                                <p>Hi {loggedUser.username} !</p>
+                                <button id="home-signup" type="button" onClick={()=>{logout()}}>Logout</button>
                                 <button id="home-toggle" type="button" onClick={()=>{editUser()}}>Edit account</button>
                             </div>
                         )}
