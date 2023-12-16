@@ -1,6 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useState } from "react";
 import BlobAnimation from "../../Components/Background";
+import axios from "axios";
+
+const API_URL = ""
 
 function Mood () {
     const navigate = useNavigate()
@@ -10,11 +13,26 @@ function Mood () {
         if (!mood){setMood(0)}
         navigate(`/playlists/${user.userId}/${mood}`) 
     } 
+    const [prompt, setPrompt] = useState("")
+    const [response, setResponse] = useState("")
+
+
 
     function moodChoice (e) {
         setMood(e.target.value)
     }
 
+    const handleSubmitForm = (e) =>{
+        e.preventDefault()
+        axios.post(`${API_URL}`, {prompt})
+        .then(res=>setResponse(res.data))
+        .catch(error=>{console.log(error)})
+    }
+
+    const handlePrompt = (e) => {
+        setPrompt(e.target.value)
+    }
+    
     return(
         <div id="mood-page">
             <div id="mood-page-info">
@@ -30,6 +48,13 @@ function Mood () {
                     </select> 
                 today</p>
                 <button id="mood-button" onClick={()=>handleSubmit()}>submit</button>
+                <form className="form" onSubmit={handleSubmitForm}>
+                    <input type="text" 
+                    placeholder="type here" 
+                    value={prompt}
+                    onChange={handlePrompt}>
+                    </input>
+                </form>
             </div>
             <BlobAnimation />
         </div>

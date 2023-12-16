@@ -6,7 +6,7 @@ import { WhatsappShareButton } from "react-share";
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
-  const redirect_URI = "https://fabulous-gnome-6f4332.netlify.app/playlists/:userId/:mood";
+  const redirect_URI = "http://localhost:5173/playlists/:userId/:mood";
   const AUTH_END = "https://accounts.spotify.com/authorize";
   const response_type = "token";
   const [playlists, setPlaylists] = useState([]);
@@ -49,6 +49,25 @@ function Playlists() {
       console.error("Error during artist search:", error);
     }
   };
+
+  async function savePlaylist(playlistLink, searchMood, userId, JSONLink) {
+    if (playlistLink) {
+      const requestBody = {
+        url: `https://open.spotify.com/embed/playlist/${playlistLink}`,
+        mood: searchMood,
+        userId: userId,
+      };
+  
+      try {
+        await axios.post(`${JSONLink}`, requestBody);
+        console.log("Playlist saved successfully");
+      } catch (error) {
+        console.error("Error saving playlist:", error);
+      }
+    } else {
+      console.log("No playlists found");
+    }
+  }  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,16 +153,19 @@ function Playlists() {
         </a>
       </div>) : 
       (<div>
-        {console.log("token defined:", token)}
         {playlists.playlists ? 
         (<div>
             <h1 id="playlist-title">Your Playlist of today</h1>
-            {console.log(playlistLink, "playlistlink form")}
             <div id="embed-iframe">
               <iframe id="frame" title="Spotify Playlist" style={{ borderRadius: "12px", marginRight: "200px" }} src={`https://open.spotify.com/embed/playlist/${playlistLink}`} width="100%" height="360" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowFullScreen loading="lazy"></iframe>
               <div id="social-share">
                 <WhatsappShareButton url={`https://open.spotify.com/playlist/${playlistLink}`} title={"I'm sharing with you my playlist of the day!"} separator={" "}><p id="share-button">Share in Whatsapp</p></WhatsappShareButton>
               </div>
+              <div>
+              <button onClick={() => savePlaylist(playlistLink, mood, userId, JSONLink)}>
+              Save Playlist
+                  </button>
+                </div>
             </div>
           </div>) : 
         (<div>{console.log("caught undefined")}</div>)}
