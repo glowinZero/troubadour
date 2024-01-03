@@ -61,7 +61,7 @@ function Navbar() {
         const response = await axios.post(`${userApi}/auth/login`, requestBody);
         const { authToken, userId } = response.data;
     
-        await storeToken(authToken);
+        storeToken(authToken);
     
         const userResponse = await axios.get(`${userApi}/auth/users/${userId}`);
         const loggedInUser = userResponse.data;
@@ -159,8 +159,6 @@ function Navbar() {
         closePopup();
     };
 
-
-
     return (
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
@@ -188,7 +186,7 @@ function Navbar() {
                             <div id="form">
                                 <button id="close-popup" onClick={() => close()}>x</button>
                                 {!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}
-                                <p>Hi {username} !</p>
+                                <p>Hi {loggedUser.username} !</p>
                                 <button id="home-signup" type="button" onClick={()=>{logout()}}>Logout</button>
                                 <button id="home-toggle" type="button" onClick={()=>{editUser()}}>Edit account</button>
                             </div>
