@@ -9,15 +9,13 @@ function Mood () {
     const navigate = useNavigate()
     const user = useParams();
     const [mood, setMood] = useState();
-    
+
     const handleSubmit = ()=>{
         if (!mood){setMood(0)}
         navigate(`/playlists/${user.userId}/${mood}`) 
     } 
     const [prompt, setPrompt] = useState("")
     const [response, setResponse] = useState("")
-
-
 
     function moodChoice (e) {
         setMood(e.target.value)

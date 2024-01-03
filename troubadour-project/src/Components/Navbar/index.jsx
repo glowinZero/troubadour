@@ -24,7 +24,7 @@ function Navbar() {
     useEffect(() => {
       const token = localStorage.getItem("authToken");
   
-      if (!token || !user) {
+      if (!token) {
         setTimeout(() => {
           navigate("/");
         }, 3000);
