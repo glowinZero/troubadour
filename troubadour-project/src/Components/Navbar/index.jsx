@@ -67,7 +67,6 @@ function Navbar() {
         const loggedInUser = userResponse.data;
     
         authenticateUser(loggedInUser, () => {
-          // Callback function to navigate after user is authenticated
           setLoggedIn(true);
           navigate("/mood");
         });
@@ -189,7 +188,7 @@ function Navbar() {
                             <div id="form">
                                 <button id="close-popup" onClick={() => close()}>x</button>
                                 {!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}
-                                <p>Hi {loggedUser.username} !</p>
+                                <p>Hi {username} !</p>
                                 <button id="home-signup" type="button" onClick={()=>{logout()}}>Logout</button>
                                 <button id="home-toggle" type="button" onClick={()=>{editUser()}}>Edit account</button>
                             </div>
