@@ -1,35 +1,31 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
-const userApi = "https://troubadour-backend.onrender.com"
+const userApi = "http://localhost:5005"
 
 function EditUser (){
     const user = useParams();
     const [loggedUser, setloggedUser] = useState([])
-    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`${userApi}/users/${user.userId}`).then((response)=>{
+        axios.get(`${userApi}/auth/users/${user.userId}`).then((response)=>{
             setloggedUser(response.data)
         }).catch(error=>{console.log(error) })
     }, [])
 
-    const handleUpdate = (e)=>{
+    const handleUpdate = async (e)=>{
         e.preventDefault();
         const updateInfo = {
-            name: !name ? loggedUser.name : name,
             email: !email ? loggedUser.email : email,
             username: !username ? loggedUser.username : username,
             password: !password ? loggedUser.password : password,
         };
 
-        axios.put(`${userApi}/users/${user.userId}`, updateInfo).then((response) => {
-            setloggedUser(response.data);
-            setName("");
+        await axios.put(`${userApi}/auth/users/${user.userId}`, updateInfo).then(() => {
             setEmail("");
             setUsername("");
             setPassword("");
@@ -37,10 +33,14 @@ function EditUser (){
         }).catch((error) => {
             console.log(error);
         });
+
+        axios.get(`${userApi}/auth/users/${user.userId}`).then((response)=>{
+            setloggedUser(response.data)
+        }).catch(error=>{console.log(error) })
     } 
 
     const deleteUser = () => {
-        axios.delete(`${userApi}/users/${user.userId}`).then(() => {
+        axios.delete(`${userApi}/auth/users/${user.userId}`).then(() => {
             localStorage.removeItem("username")
             navigate("/")
             window.location.reload()
@@ -52,7 +52,6 @@ function EditUser (){
     return(
         <div id="edit-user">
             <form id="form-edit-user" onSubmit={handleUpdate}>
-                <label>Name <input id="name" type="text" placeholder={loggedUser.name} value={name} onChange={e=>{setName(e.target.value)}}/></label>
                 <label>Email <input type="email" placeholder={loggedUser.email} value={email} onChange={e=>{setEmail(e.target.value)}}/></label>
                 <label>Username <input type="text" placeholder={loggedUser.username} value={username} onChange={e=>{setUsername(e.target.value)}}/></label>
                 <label>Password <input type="password" placeholder="********" value={password} onChange={e=>{setPassword(e.target.value)}}/></label>

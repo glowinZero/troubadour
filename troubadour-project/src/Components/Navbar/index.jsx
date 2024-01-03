@@ -28,7 +28,7 @@ function Navbar() {
         setTimeout(() => {
           navigate("/");
         }, 3000);
-        return; // Add a return statement here
+        return; 
       }
   
       setLoggedUser(user);
@@ -130,6 +130,8 @@ function Navbar() {
         setLoggedUser(null);
         setLoggedIn(false);
         localStorage.removeItem("Logged In");
+        setEmail("");
+        setPassword("");
         navigate("/");
       };
 
@@ -169,7 +171,7 @@ function Navbar() {
                 <button id="link-mood" onClick={()=>{createPlaylist()}}>Create Playlist</button>
                 <button id="link-mood" onClick={()=>{historyPage()}}>History</button>
             </div>} 
-            <Popup trigger={<button id="popup" onClick={openPopup}>{!username || !loggedin ? <p>Get Started</p> : <p>{username}</p>}</button>}
+            <Popup trigger={<button id="popup" onClick={openPopup}>{!loggedin ? <p>Get Started</p> : <p>{loggedUser.username}</p>}</button>}
             modal
             nested
             open={popupOpen}
