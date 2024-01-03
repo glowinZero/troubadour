@@ -28,7 +28,7 @@ function Navbar() {
         setTimeout(() => {
           navigate("/");
         }, 3000);
-        return; // Add a return statement here
+        return; 
       }
   
       setLoggedUser(user);
@@ -155,15 +155,7 @@ function Navbar() {
     };
 
     const historyPage = () =>{
-        const storedUserId = localStorage.getItem("userId");
-        if (!id) {
-            setNewUserId(storedUserId);
-            navigate(`/history/${storedUserId}`);
-        } else {
-            setNewUserId(null);
-            navigate(`/history/${id}`);
-        }
-
+        navigate(`/history/`);
         setPopupOpen(false);
         closePopup();
     };
