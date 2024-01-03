@@ -9,6 +9,7 @@ function Mood () {
     const navigate = useNavigate()
     const user = useParams();
     const [mood, setMood] = useState();
+    
     const handleSubmit = ()=>{
         if (!mood){setMood(0)}
         navigate(`/playlists/${user.userId}/${mood}`) 

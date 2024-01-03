@@ -55,27 +55,27 @@ function Navbar() {
   
     const handleLoginSubmit = async (e) => {
       e.preventDefault();
-  
       const requestBody = { email, password };
-  
+    
       try {
         const response = await axios.post(`${userApi}/auth/login`, requestBody);
         const { authToken, userId } = response.data;
-  
+    
         await storeToken(authToken);
-  
+    
         const userResponse = await axios.get(`${userApi}/auth/users/${userId}`);
         const loggedInUser = userResponse.data;
-  
-        authenticateUser(loggedInUser);
-  
-        setLoggedIn(true);
-        navigate("/mood");
+    
+        authenticateUser(loggedInUser, () => {
+          // Callback function to navigate after user is authenticated
+          setLoggedIn(true);
+          navigate("/mood");
+        });
       } catch (error) {
         const errorDescription = error.response?.data?.message || "Login failed.";
         setError(errorDescription);
       }
-    };
+    };    
 
     const handleRegister = (e) => {
         e.preventDefault();
