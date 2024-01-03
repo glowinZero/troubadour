@@ -28,7 +28,7 @@ function Navbar() {
         setTimeout(() => {
           navigate("/");
         }, 3000);
-        return; 
+        return; // Add a return statement here
       }
   
       setLoggedUser(user);
@@ -55,26 +55,27 @@ function Navbar() {
   
     const handleLoginSubmit = async (e) => {
       e.preventDefault();
+  
       const requestBody = { email, password };
-    
+  
       try {
         const response = await axios.post(`${userApi}/auth/login`, requestBody);
         const { authToken, userId } = response.data;
-    
+  
         storeToken(authToken);
-    
+  
         const userResponse = await axios.get(`${userApi}/auth/users/${userId}`);
         const loggedInUser = userResponse.data;
-    
-        authenticateUser(loggedInUser, () => {
-          setLoggedIn(true);
-          navigate("/mood");
-        });
+  
+        authenticateUser(loggedInUser);
+  
+        setLoggedIn(true);
+        navigate("/mood");
       } catch (error) {
         const errorDescription = error.response?.data?.message || "Login failed.";
         setError(errorDescription);
       }
-    };    
+    };
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -158,6 +159,8 @@ function Navbar() {
         setPopupOpen(false);
         closePopup();
     };
+
+
 
     return (
         <nav id="navbar">
