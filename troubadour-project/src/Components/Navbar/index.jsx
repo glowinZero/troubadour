@@ -62,7 +62,7 @@ function Navbar() {
         const response = await axios.post(`${userApi}/auth/login`, requestBody);
         const { authToken, userId } = response.data;
   
-        storeToken(authToken);
+        await storeToken(authToken);
   
         const userResponse = await axios.get(`${userApi}/auth/users/${userId}`);
         const loggedInUser = userResponse.data;
