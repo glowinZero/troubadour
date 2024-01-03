@@ -171,14 +171,14 @@ function Navbar() {
                 <button id="link-mood" onClick={()=>{createPlaylist()}}>Create Playlist</button>
                 <button id="link-mood" onClick={()=>{historyPage()}}>History</button>
             </div>} 
-            <Popup trigger={<button id="popup" onClick={openPopup}>{!loggedin ? <p>Get Started</p> : <p>{loggedUser.username}</p>}</button>}
+            <Popup trigger={<button id="popup" onClick={openPopup}>{!loggedin ? <p>Get Started</p> : <p>{loggedUser?.username}</p>}</button>}
             modal
             nested
             open={popupOpen}
             onClose={closePopup}>
                 {(close) => (
                     <form className="overlay" onSubmit={formType === "login" ? (e)=>handleLoginSubmit(e, close) : (e)=>handleRegister(e, close)}>
-                        {!loggedin || !username === "" ?(
+                        {!loggedin || !loggedUser?.username === "" ?(
                             <div id="form">
                                 <button id="close-popup" onClick={() => close()}>x</button>
                                 <h4>{formType === "login" ? "login" : "signup"}</h4>
@@ -191,7 +191,7 @@ function Navbar() {
                             <div id="form">
                                 <button id="close-popup" onClick={() => close()}>x</button>
                                 {!username || !password ? setUsername(window.localStorage.getItem("username")) : console.log("User info provided")}
-                                <p>Hi {loggedUser.username} !</p>
+                                <p>Hi {loggedUser?.username} !</p>
                                 <button id="home-signup" type="button" onClick={()=>{logout()}}>Logout</button>
                                 <button id="home-toggle" type="button" onClick={()=>{editUser()}}>Edit account</button>
                             </div>
