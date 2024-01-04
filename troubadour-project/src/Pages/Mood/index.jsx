@@ -3,7 +3,7 @@ import { useState } from "react";
 import BlobAnimation from "../../Components/Background";
 import axios from "axios";
 
-const API_URL = "https://trobadour-backend.adaptable.app/"
+const API_URL = "https://trobadour-backend.adaptable.app"
 
 function Mood () {
     const navigate = useNavigate()
