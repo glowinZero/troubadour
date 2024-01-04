@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from "react"
 import logo from "../../assets/noun-banjo-5393194 (1).png"
 import { AuthContext } from "../../Context/auth.context";
 
-const userApi = "http://localhost:5005"
+const userApi = "https://trobadour-backend.adaptable.app/"
 
 function Navbar() {
     const [username, setUsername] = useState("");
