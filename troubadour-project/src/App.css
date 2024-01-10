@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Futura";
-  src: local('Futura'), url('../public/futura/FuturaPTMedium.woff') format('woff');
+  src: local('Futura'), url('./assets/futura/FuturaPTMedium.woff') format('woff');
 }
 
 @font-face {
   font-family: "Futura-light";
-  src: local('Futura'), url('../public/futura/FuturaPTLight.woff') format('woff');
+  src: local('Futura'), url('./assets//futura//FuturaPTLight.woff') format('woff');
 }
 
 #root {
