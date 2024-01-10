@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from "react"
 import logo from "../../assets/noun-banjo-5393194 (1).png"
 import { AuthContext } from "../../Context/auth.context";
 
-const userApi = "https://trobadour-backend.adaptable.app"
+const userApi = "https://trobadour.adaptable.app/"
 
 function Navbar() {
     const [username, setUsername] = useState("");
@@ -76,7 +76,7 @@ function Navbar() {
         setError(errorDescription);
       }
     };
-
+    
     const handleRegister = (e) => {
         e.preventDefault();
         const requestBody = { email, password, username};
