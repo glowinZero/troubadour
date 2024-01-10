@@ -3,7 +3,7 @@ import { useState } from "react";
 import BlobAnimation from "../../Components/Background";
 import axios from "axios";
 
-const API_URL = ""
+const API_URL = ""//add correct api url here and look if the handle submit is correct. 
 
 function Mood () {
     const navigate = useNavigate()
@@ -15,8 +15,6 @@ function Mood () {
     } 
     const [prompt, setPrompt] = useState("")
     const [response, setResponse] = useState("")
-
-
 
     function moodChoice (e) {
         setMood(e.target.value)
