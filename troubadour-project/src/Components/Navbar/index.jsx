@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from "react"
 import logo from "../../assets/noun-banjo-5393194 (1).png"
 import { AuthContext } from "../../Context/auth.context";
 
-const userApi = "https://trobadour.adaptable.app/"
+const userApi = "http://localhost:5005"
 
 function Navbar() {
     const [username, setUsername] = useState("");
@@ -60,21 +60,22 @@ function Navbar() {
   
       try {
         const response = await axios.post(`${userApi}/auth/login`, requestBody);
-        const { authToken, userId } = response.data;
+        const { authToken } = response.data;
   
         storeToken(authToken);
-  
-        const userResponse = await axios.get(`${userApi}/auth/users/${userId}`);
+        const userResponse = await axios.get(`${userApi}/auth/users`);
+        const user = userResponse.data.find(user => user.email === email);
+
         const loggedInUser = userResponse.data;
-  
+        
         authenticateUser(loggedInUser);
-  
         setLoggedIn(true);
-        navigate("/mood");
+        navigate(`/mood/${user._id}`);
       } catch (error) {
         const errorDescription = error.response?.data?.message || "Login failed.";
         setError(errorDescription);
       }
+      
     };
     
     const handleRegister = (e) => {
@@ -111,7 +112,7 @@ function Navbar() {
             storeToken(response.data.authToken);
             localStorage.setItem("Logged In", response.data.authToken);
             authenticateUser();
-            navigate("/dashboard");
+            navigate("/mood");
           })
           .catch((error) => {
             const errorDescription =

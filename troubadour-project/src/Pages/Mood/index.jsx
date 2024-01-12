@@ -3,16 +3,16 @@ import { useState } from "react";
 import BlobAnimation from "../../Components/Background";
 import axios from "axios";
 
-const API_URL = "https://trobadour.adaptable.app/"
+const API_URL = "http://localhost:5005"
 
 function Mood () {
     const navigate = useNavigate()
-    const user = useParams();
     const [mood, setMood] = useState();
+    const {userId} = useParams();
+    const handleSubmit = async () =>{
 
-    const handleSubmit = ()=>{
         if (!mood){setMood(0)}
-        navigate(`/playlists/${user.userId}/${mood}`) 
+        navigate(`/playlists/${userId}/${mood}`) 
     } 
 
     function moodChoice (e) {
