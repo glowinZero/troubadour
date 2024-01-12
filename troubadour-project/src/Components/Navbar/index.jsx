@@ -86,7 +86,7 @@ function Navbar() {
           password === "" ||
           username === ""
         ) {
-          alert("Provide all fields in order to create a new Student");
+          alert("Provide all fields in order to create a new user");
           return;
         }
     
