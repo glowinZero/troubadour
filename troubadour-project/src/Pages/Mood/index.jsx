@@ -22,8 +22,9 @@ function Mood () {
     const [response, setResponse] = useState("")
 
     const handleSubmitForm = (e) => {
+        console.log("submit form clicked")
         e.preventDefault();
-        axios.post(`${API_URL}`, { prompt })
+        axios.post(`${API_URL}/api/playlists/chatgpt`, { prompt })
             .then(res => {
                 setResponse(res.data);
                 navigate(`/playlists/${user.userId}/${response}`);
@@ -62,7 +63,7 @@ function Mood () {
                     onChange={handlePrompt}>
                     </input>
                 </form>
-                <button id="form-button" onClick={()=>handleSubmitForm()}>submit</button>
+                <button id="form-button" onClick={(e)=>handleSubmitForm(e)}>submit</button>
             </div>  
             <BlobAnimation />
         </div> 
