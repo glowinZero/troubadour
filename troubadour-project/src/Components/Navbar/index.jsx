@@ -30,7 +30,6 @@ function Navbar() {
         }, 3000);
         return; 
       }
-  
       setLoggedUser(user);
   
       const fetchData = async () => {
