@@ -14,19 +14,26 @@ function Mood () {
         if (!mood){setMood(0)}
         navigate(`/playlists/${user.userId}/${mood}`) 
     } 
-    const [prompt, setPrompt] = useState("")
-    const [response, setResponse] = useState("")
 
     function moodChoice (e) {
         setMood(e.target.value)
     }
 
-    const handleSubmitForm = (e) =>{
-        e.preventDefault()
-        axios.post(`${API_URL}`, {prompt})
-        .then(res=>setResponse(res.data))
-        .catch(error=>{console.log(error)})
-    }
+    const [prompt, setPrompt] = useState("")
+    const [response, setResponse] = useState("")
+
+    const handleSubmitForm = (e) => {
+        e.preventDefault();
+        axios.post(`${API_URL}`, { prompt })
+            .then(res => {
+                setResponse(res.data);
+                navigate(`/playlists/${user.userId}/${response}`);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+    
 
     const handlePrompt = (e) => {
         setPrompt(e.target.value)
@@ -47,16 +54,19 @@ function Mood () {
                     </select> 
                 today</p>
                 <button id="mood-button" onClick={()=>handleSubmit()}>submit</button>
-                <form className="form" onSubmit={handleSubmitForm}>
+
+                // this is the prompt for the GPT-3 API//
+                <form className="form" onSubmit={handleSubmitForm}> 
                     <input type="text" 
                     placeholder="type here" 
                     value={prompt}
                     onChange={handlePrompt}>
                     </input>
                 </form>
-            </div>
+                <button id="form-button" onClick={()=>handleSubmitForm()}>submit</button>
+            </div>  
             <BlobAnimation />
-        </div>
+        </div> 
     )
 }
 
