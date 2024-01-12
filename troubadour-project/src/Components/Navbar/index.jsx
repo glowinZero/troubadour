@@ -5,7 +5,9 @@ import axios from "axios"
 import { useEffect, useState, useContext } from "react"
 import logo from "../../assets/noun-banjo-5393194 (1).png"
 import { AuthContext } from "../../Context/auth.context";
+
 const userApi = "https://trobadour.adaptable.app"
+
 function Navbar() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -18,20 +20,25 @@ function Navbar() {
     const { storeToken, authenticateUser } = useContext(AuthContext);
     const [loggedUser, setLoggedUser] = useState();
     const [loggedin, setLoggedIn] = useState(false);
+  
     useEffect(() => {
       const token = localStorage.getItem("authToken");
+  
       if (!token) {
         setTimeout(() => {
           navigate("/");
         }, 3000);
-        return;
+        return; 
       }
       setLoggedUser(user);
+  
       const fetchData = async () => {
         const getToken = localStorage.getItem("authToken");
+  
         if (getToken && user) {
           try {
             const idUser = user._id;
+  
             const responseUser = await axios.get(
               `${userApi}/auth/users/${idUser}`
             );
@@ -41,18 +48,25 @@ function Navbar() {
           }
         }
       };
+  
       fetchData();
     }, [user, navigate]);
+  
     const handleLoginSubmit = async (e) => {
       e.preventDefault();
+  
       const requestBody = { email, password };
+  
       try {
         const response = await axios.post(`${userApi}/auth/login`, requestBody);
         const { authToken } = response.data;
+  
         storeToken(authToken);
         const userResponse = await axios.get(`${userApi}/auth/users`);
         const user = userResponse.data.find(user => user.email === email);
+
         const loggedInUser = userResponse.data;
+        
         authenticateUser(loggedInUser);
         setLoggedIn(true);
         navigate(`/mood/${user._id}`);
@@ -60,10 +74,13 @@ function Navbar() {
         const errorDescription = error.response?.data?.message || "Login failed.";
         setError(errorDescription);
       }
+      
     };
+    
     const handleRegister = (e) => {
         e.preventDefault();
         const requestBody = { email, password, username};
+    
         if (
           email === "" ||
           password === "" ||
@@ -72,16 +89,19 @@ function Navbar() {
           alert("Provide all fields in order to create a new user");
           return;
         }
+    
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
         if (!emailRegex.test(email)) {
           alert("Provide a valid email");
           return;
         }
+    
         const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
         if (!passwordRegex.test(password)) {
           alert("Password must have at least 6 characters and contain 1 lowercase letter, 1 uppercase letter, 1 number");
           return;
         }
+    
         axios
           .post(`${userApi}/auth/signup`, requestBody)
           .then(() => {
@@ -100,9 +120,11 @@ function Navbar() {
             setError(errorDescription);
           });
     };
+
     const toggleForm = () =>{
         setFormType(formType === "login" ? "signup" : "login");
     };
+
     const logout = () => {
         logOut();
         setLoggedUser(null);
@@ -112,35 +134,43 @@ function Navbar() {
         setPassword("");
         navigate("/");
       };
+
     const openPopup = () => {
         setPopupOpen(true);
     };
+
     const closePopup = () => {
         setPopupOpen(false);
     };
+
     const editUser = () =>{
         const storedUserId = loggedUser._id;
         navigate(`/edit/${storedUserId}`);
         setPopupOpen(false);
         closePopup();
     };
+
     const createPlaylist = () =>{
         navigate(`/mood`);
         setPopupOpen(false);
         closePopup();
     };
+
     const historyPage = () =>{
         navigate(`/history/`);
         setPopupOpen(false);
         closePopup();
     };
+
+
+
     return (
         <nav id="navbar">
             <img id="logo-bar" src={logo}/>
             {loggedin && <div id="menu">
                 <button id="link-mood" onClick={()=>{createPlaylist()}}>Create Playlist</button>
                 <button id="link-mood" onClick={()=>{historyPage()}}>History</button>
-            </div>}
+            </div>} 
             <Popup trigger={<button id="popup" onClick={openPopup}>{!loggedin ? <p>Get Started</p> : <p>{loggedUser?.username}</p>}</button>}
             modal
             nested
@@ -173,8 +203,3 @@ function Navbar() {
     )
 }
 export default Navbar
-
-
-
-
-
