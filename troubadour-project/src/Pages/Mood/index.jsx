@@ -8,8 +8,11 @@ function Mood () {
     const navigate = useNavigate()
     const [mood, setMood] = useState();
     const {userId} = useParams();
-    const handleSubmit = async () =>{
+    const [prompt, setPrompt] = useState("")
+    const [response, setResponse] = useState("")
 
+
+    const handleSubmit = async () =>{
         if (!mood){setMood(0)}
         navigate(`/playlists/${userId}/${mood}`) 
     } 
@@ -18,21 +21,21 @@ function Mood () {
         setMood(e.target.value)
     }
 
-    const [prompt, setPrompt] = useState("")
-    const [response, setResponse] = useState("")
 
     const handleSubmitForm = (e) => {
         console.log("submit form clicked")
         e.preventDefault();
-        axios.post(`${API_URL}/api/playlists/chatgpt`, { prompt })
+        axios.post(`${API_URL}/api/openai`, { prompt })
             .then(res => {
                 setResponse(res.data);
-                navigate(`/playlists/${user.userId}/${response}`);
+                navigate(`/playlists/${userId}/${response}`);
             })
             .catch(error => {
                 console.log(error);
             });
     };
+
+
     
 
     const handlePrompt = (e) => {
