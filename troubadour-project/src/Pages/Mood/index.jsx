@@ -27,8 +27,8 @@ function Mood () {
         e.preventDefault();
         axios.post(`${API_URL}/api/openai`, { prompt })
             .then(res => {
-                setResponse(res.data);
-                navigate(`/playlists/${userId}/${response}`);
+                console.log(res.data)
+                navigate(`/playlists/${userId}/${res.data}`);
             })
             .catch(error => {
                 console.log(error);
