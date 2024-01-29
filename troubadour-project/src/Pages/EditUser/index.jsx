@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
-const userApi = "https://trobadour.adaptable.app"
+const userApi = "http://localhost:5005"
 function EditUser (){
     const user = useParams();
     const [loggedUser, setloggedUser] = useState([])
