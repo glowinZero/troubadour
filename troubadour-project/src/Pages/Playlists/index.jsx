@@ -6,7 +6,7 @@ import { WhatsappShareButton } from "react-share";
 
 function Playlists() {
   const client_id = "57045c8caab548509de4307fd8995ec4";
-  const redirect_URI = "https://trobadour.adaptable.app/playlists/:userId/:mood";
+  const redirect_URI = "https://trobadour.netlify.app/playlists/:userId/:mood";
   const AUTH_END = "https://accounts.spotify.com/authorize";
   const response_type = "token";
   const [playlists, setPlaylists] = useState([]);
